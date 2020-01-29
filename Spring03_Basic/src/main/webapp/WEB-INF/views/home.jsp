@@ -11,6 +11,12 @@
 <body>
 
 <h1>Index Page</h1>
+<c:if test="${not empty id }">
+	<p>
+		Signed in as <strong>${id }</strong>
+		<a href="userslogout.do">Signed Out</a>
+	</p>
+</c:if>
 
 <ul>		<%-- 아직 DB와 연동하지 않았지만 가상의 To Do 리스트를 출력해보자 --%>
 	<li><a href="todo/list.do">To Do List - 1</a></li>
