@@ -6,19 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/home.jsp</title>
+<title>/WEB-INF/views/todo/list.jsp</title>
 </head>
 <body>
 
-<h1>Index Page</h1>
+<h1>To Do List</h1>
 
-<ul>		<%-- 아직 DB와 연동하지 않았지만 가상의 To Do 리스트를 출력해보자 --%>
-	<li><a href="todo/list.do">To Do List</a></li>
-</ul>
-
-<h2>Notice</h2>
 <ul>
-	<c:forEach var="tmp" items="${requestScope.notice }">
+	<c:forEach var="tmp" items="${todoList }">
 		<li>${tmp }</li>
 	</c:forEach>
 </ul>

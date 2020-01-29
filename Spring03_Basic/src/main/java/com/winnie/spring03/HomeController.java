@@ -22,9 +22,12 @@ public class HomeController {
 	public String home(HttpServletRequest request) {
 		
 		List<String> notice=new ArrayList<>();
-		notice.add("Have yourself a well health!");
-		notice.add("Watch out for Wuhan coronavirus");
-		notice.add("Good Luck");
+		notice.add("It’s a special magic at Christmastime this year.");
+		notice.add("Hearts are gay and merry, and full of yuletide cheer!");
+		notice.add("The sprit of the season will make our dreams come true.");
+		notice.add("Memories of Christmas are here for me and you.");
+		notice.add("With caroling, bells ring-a-ling, and Santa Claus will always be");
+		notice.add("Part of Christmas fantasy.");
 		
 		// 모델을 request에 담는다
 		request.setAttribute("notice", notice);
