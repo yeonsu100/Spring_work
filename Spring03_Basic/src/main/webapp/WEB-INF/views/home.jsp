@@ -15,6 +15,7 @@
 <ul>		<%-- 아직 DB와 연동하지 않았지만 가상의 To Do 리스트를 출력해보자 --%>
 	<li><a href="todo/list.do">To Do List - 1</a></li>
 	<li><a href="todo/list2.do">To Do List - 2</a></li>
+	<li><a href="todo/list3.do">To Do List - 3</a></li>
 </ul>
 
 <h2>Notice</h2>
