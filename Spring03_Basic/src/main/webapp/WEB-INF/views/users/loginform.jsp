@@ -26,5 +26,14 @@
 	<button type="submit">Sign In</button>
 </form>
 
+<h1>Sign in form - 3</h1>
+<form action="${pageContext.request.contextPath }/users/login3.do" method="post">
+	<label for="id">ID</label>
+	<input type="text" name="id" id="id" />
+	<label for="pwd">PASSWORD</label>
+	<input type="password" name="pwd" id="pwd" />
+	<button type="submit">Sign In</button>
+</form>
+
 </body>
 </html>

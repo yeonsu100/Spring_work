@@ -4,9 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.winnie.spring03.users.dto.UsersDto;
 
 @Controller
 public class UsersController {	
@@ -51,18 +54,41 @@ public class UsersController {
 			ModelAndView mView) {		// 파라미터들은  하나씩 추출할수도 있다.
 							// 파라미터명과 지역변수명을 똑같이 해놓으면 자동으로 추출된다.
 		// 유효한 정보인지 여부
-			boolean isSuccess=false;
-			if(id.equals("winnie") && pwd.equals("1234")) {
-				isSuccess=true;
-				// 로그인 처리를 한다
-				session.setAttribute("id", id);
-			}
-			// view 페이지에서 필요한 모델을 담고
-			mView.addObject("isSuccess", isSuccess);
-			// view의 정보도 담고
-			mView.setViewName("users/login");
-			// 리턴해준다.
-			return mView;
+		boolean isSuccess=false;
+		if(id.equals("winnie") && pwd.equals("1234")) {
+			isSuccess=true;
+			// 로그인 처리를 한다
+			session.setAttribute("id", id);
+		}
+		// view 페이지에서 필요한 모델을 담고
+		mView.addObject("isSuccess", isSuccess);
+		// view의 정보도 담고
+		mView.setViewName("users/login");
+		// 리턴해준다.
+		return mView;
+}
+	
+	/*
+	 * @ModelAttribute 어노테이션과 함께 dto를 메소드의 인자로 선언하면
+	 * 전송되는 파라미터가 자동 추출되어서 Dto 객체에 담겨 인자로 전달된다.
+	 * 단, 전송되는 파라미터명과 Dto의 필드명이 같아야한다.
+	 */
+	@RequestMapping("/users/login3")
+	public ModelAndView login3(@ModelAttribute UsersDto dto,
+			HttpSession session, ModelAndView mView) {
+		// 유효한 정보인지 여부
+		boolean isSuccess=false;
+		if(dto.getId().equals("winnie") && dto.getPwd().equals("1234")) {
+			isSuccess=true;
+			// 로그인 처리를 한다
+			session.setAttribute("id", dto.getId());
+		}
+		// view 페이지에서 필요한 모델을 담고
+		mView.addObject("isSuccess", isSuccess);
+		// view의 정보도 담고
+		mView.setViewName("users/login");
+		// 리턴해준다.
+		return mView;
 	}
 	
 }
