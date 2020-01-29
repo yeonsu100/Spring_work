@@ -16,6 +16,8 @@
 	<li><a href="todo/list.do">To Do List - 1</a></li>
 	<li><a href="todo/list2.do">To Do List - 2</a></li>
 	<li><a href="todo/list3.do">To Do List - 3</a></li>
+	
+	<li><a href="users/loginform.do">Go to the Sign in page</a></li>
 </ul>
 
 <h2>Notice</h2>
