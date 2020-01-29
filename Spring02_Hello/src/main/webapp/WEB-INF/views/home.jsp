@@ -15,6 +15,7 @@
 
 <ul>
 	<li><a href="fortune.do">Show today's fortune</a></li>
+	<li><a href="person.do">Show today's person</a></li>
 </ul>
 
 <h2>Notice</h2>
