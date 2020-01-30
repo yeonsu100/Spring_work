@@ -13,6 +13,11 @@
 
 <div class="container">
 	<h1>Index Page</h1>
+	
+	<ul>
+		<li><a href="member/list.do">Show member list (Member Table)</a></li>
+	</ul>
+	
 	<h2>Notice</h2>
 	<ul>
 		<c:forEach var="tmp" items="${requestScope.notice }">
