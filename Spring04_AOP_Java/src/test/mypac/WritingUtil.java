@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 // @Component 어노테이션을 붙여놓으면 컴포넌트 스캔을 했을 때 bean이 된다.
 @Component
 public class WritingUtil {
+	
 	public void write1() {
 		System.out.println("Write a letter");
 	}
