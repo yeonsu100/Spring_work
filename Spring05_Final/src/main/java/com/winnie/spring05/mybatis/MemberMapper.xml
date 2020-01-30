@@ -6,4 +6,10 @@
 		FROM member
 		ORDER BY num ASC
 	</select>
+	
+	<delete id="delete" parameterType="int" >
+		DELETE FROM member
+		WHERE num=#{num}
+	</delete>
+
 </mapper>

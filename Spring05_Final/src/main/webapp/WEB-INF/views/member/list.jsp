@@ -18,6 +18,7 @@
 				<th>No.</th>
 				<th>NAME</th>
 				<th>ADDRESS</th>
+				<th>DELETE</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,6 +27,7 @@
 					<td>${tmp.num }</td>
 					<td>${tmp.name }</td>
 					<td>${tmp.addr }</td>
+					<td><a href="delete.do?num=${tmp.num }">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
