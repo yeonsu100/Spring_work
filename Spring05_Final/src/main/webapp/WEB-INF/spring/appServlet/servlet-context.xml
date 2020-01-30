@@ -19,16 +19,36 @@
 		class="org.springframework.jndi.JndiObjectFactoryBean">
 		<beans:property name="jndiName" value="java:comp/env/jdbc/myoracle"/>
 	</beans:bean>
+	<!-- 위의 설정을 java code로 환산하면
+	
+		 dataSource=new JndiObjectFactoryBean();
+		 dataSource.setJndiName("java:comp/env/jdbc/myoracle"); 
+	-->
+	
 	<beans:bean id="sessionFactory" 
 		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<beans:property name="dataSource" ref="dataSource"/>
+		<beans:property name="dataSource" ref="dataSource"/>		<!-- 위에서 언급된 dataSource를 참조하고 있다. -->
 		<beans:property name="configLocation"
 	value="classpath:com/gura/spring05/mybatis/Configuration.xml"/>
 	</beans:bean>
+	<!-- 위의 설정을 java code로 환산하면
+	
+		 dataSource=new JndiObjectFactoryBean();
+		 dataSource.setJndiName("java:comp/env/jdbc/myoracle"); 
+		 
+		 sessionFactory=new SqlSessionFactoryBean();
+		 sessionFactory.setDataSource(dataSource);
+		 sessionFactory.setConfigLocation(classpath:com/gura/spring05/mybatis/Configuration.xml);
+	-->
+	
 	<beans:bean class="org.mybatis.spring.SqlSessionTemplate">
-		<beans:constructor-arg name="sqlSessionFactory" 
-			ref="sessionFactory"/>
+		<beans:constructor-arg name="sqlSessionFactory" ref="sessionFactory"/>
+			<!-- constructor-arg : 생성자의 인자 -->
 	</beans:bean>
+	<!-- 위의 설정을 java code로 환산하면
+		 
+		 new SqlSessionTemplate(sessionFactory);
+	-->
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
