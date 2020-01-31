@@ -51,10 +51,15 @@ public class MemberController {
 	 * 단, 파라미터명과 Dto의 필드명이 일치해야 한다. 
 	 */
 	@RequestMapping("/member/insert")
-	public ModelAndView insert(@ModelAttribute MemberDto dto,
+	public ModelAndView insert(@ModelAttribute("dto") MemberDto dto,
 			ModelAndView mView) {
 		dao.insert(dto);
-		mView.addObject("dto", dto);
+		/*
+		 * @ModelAttribute("dto") MemberDto dto의 의미는
+		 * 1. 전송되는 파라미터를 자동으로 추출해서 MemberDto에 담아주기도하고
+		 * 2. "dto"라는 키값으로 MemberDto 객체를 request영역에 담아주는 역할도 한다.
+		 */
+		// mView.addObject("dto", dto);
 		mView.setViewName("/member/insert"); 		// 여기는 리다일렉트 이동하지 않고 insert.jsp로 보내 메세지를 띄워본다.
 		return mView;
 	}
