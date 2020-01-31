@@ -30,4 +30,10 @@ public class TodoDaoImpl implements TodoDao {
 		session.insert("todo.insert", dto);
 	}
 
+	@Override
+	public TodoDto getData(int num) {
+		TodoDto dto=session.selectOne("todo.getData", num);
+		return dto;
+	}
+
 }

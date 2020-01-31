@@ -17,4 +17,10 @@
 		(num, content, regdate)
 		VALUES(todo_seq.NEXTVAL, #{content}, SYSDATE)
 	</insert>
+	
+	<select id="getData" parameterType="int" resultType="com.winnie.springtodo.todo.dto.TodoDto">
+		SELECT num, content, regdate
+		FROM todo
+		WHERE num=#{num}
+	</select>
 </mapper>

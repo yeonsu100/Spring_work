@@ -44,4 +44,13 @@ public class TodoController {
 		return mView;
 	}
 	
+	@RequestMapping("/todo/updateform")
+	public ModelAndView updateform(@RequestParam int num,
+			ModelAndView mView) {
+		TodoDto dto=dao.getData(num);
+		mView.addObject("dto", dto);
+		mView.setViewName("todo/updateform");
+		return mView;
+	}
+	
 }
