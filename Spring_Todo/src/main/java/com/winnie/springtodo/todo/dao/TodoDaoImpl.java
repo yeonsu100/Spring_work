@@ -25,4 +25,9 @@ public class TodoDaoImpl implements TodoDao {
 		session.delete("todo.delete", num);
 	}
 
+	@Override
+	public void insert(TodoDto dto) {
+		session.insert("todo.insert", dto);
+	}
+
 }

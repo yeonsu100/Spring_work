@@ -11,4 +11,10 @@
 		DELETE FROM todo
 		WHERE num=#{num}
 	</delete>
+	
+	<insert id="insert" parameterType="com.winnie.springtodo.todo.dto.TodoDto">
+		INSERT INTO todo
+		(num, content, regdate)
+		VALUES(todo_seq.NEXTVAL, #{content}, SYSDATE)
+	</insert>
 </mapper>

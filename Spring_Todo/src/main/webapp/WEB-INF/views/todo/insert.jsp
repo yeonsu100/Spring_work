@@ -4,13 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/member/insert.jsp</title>
+<title>/todo/insert.jsp</title>
 </head>
 <body>
 
 <div class="container">
 	<h1>Alert!</h1>
-	<p>Successfully add an information of <strong>${dto.name }</strong>!</p>
+	<p>Successfully add an assignment! </br>
+	<a href="list.do">Back to the list page</a>
+	</p>
 </div>
 
 </body>

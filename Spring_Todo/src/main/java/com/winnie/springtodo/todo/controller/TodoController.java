@@ -30,5 +30,10 @@ public class TodoController {
 		return "redirect:/todo/list.do";
 	}
 	
+	@RequestMapping("/todo/insertform")
+	public String insertform() {
+		return "todo/insertform";
+	}
+	
 	
 }
