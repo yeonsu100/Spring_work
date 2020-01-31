@@ -27,14 +27,20 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public void insert(MemberDto dto) {			// dto : parameterType
-		session.insert("member.insert", dto);	// .insert : sql id
+	public void insert(MemberDto dto) {	
+		session.insert("member.insert", dto);
 	}
-	
-	
-//	@Override
-//	public void update(int num) {
-//		session.update("member.update", num);
-//	}
+
+	@Override
+	public MemberDto getData(int num) {
+		MemberDto dto=session.selectOne("member.getData", num);
+		return dto;
+	}
+
+	@Override
+	public void update(MemberDto dto) {
+		session.update("member.update", dto);
+	}
+
 
 }
