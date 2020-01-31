@@ -65,7 +65,7 @@ public class MemberController {
 	}
 	
 	// 회원정보 업데이트 요청처리
-	@RequestMapping("/member/updatefrom")
+	@RequestMapping("/member/updateform")
 	public ModelAndView updateform(@RequestParam int num,
 			ModelAndView mView) {
 		// 수정할 회원의 정보를 얻어와서
