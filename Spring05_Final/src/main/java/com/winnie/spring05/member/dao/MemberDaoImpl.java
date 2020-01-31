@@ -26,4 +26,15 @@ public class MemberDaoImpl implements MemberDao {
 		session.delete("member.delete", num);
 	}
 
+	@Override
+	public void insert(MemberDto dto) {			// dto : parameterType
+		session.insert("member.insert", dto);	// .insert : sql id
+	}
+	
+	
+//	@Override
+//	public void update(int num) {
+//		session.update("member.update", num);
+//	}
+
 }

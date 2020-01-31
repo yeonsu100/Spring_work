@@ -43,7 +43,7 @@
 	
 	<beans:bean class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg name="sqlSessionFactory" ref="sessionFactory"/>
-			<!-- constructor-arg : 생성자의 인자 -->
+			<!-- constructor-arg : 생성자의 인자, SqlSessionTemplate : dao가 의존하는 객체 -->
 	</beans:bean>
 	<!-- 위의 설정을 java code로 환산하면
 		 

@@ -19,6 +19,7 @@
 				<th>NAME</th>
 				<th>ADDRESS</th>
 				<th>DELETE</th>
+				<th>UPDATE</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,10 +29,12 @@
 					<td>${tmp.name }</td>
 					<td>${tmp.addr }</td>
 					<td><a href="delete.do?num=${tmp.num }">Delete</a></td>
+					<td><a href="update.do?num=${tmp.num }">Update</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="insertform.do">Add a member</a>
 </div>
 
 </body>

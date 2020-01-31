@@ -11,5 +11,20 @@
 		DELETE FROM member
 		WHERE num=#{num}
 	</delete>
+	
+	<insert id="insert" parameterType="com.winnie.spring05.member.dto.MemberDto">
+		INSERT INTO member
+		(num, name, addr)
+		VALUES(member_seq.NEXTVAL, #{name}, #{addr})		
+			<!-- dto.getName(), dto.getAddr()을 호출해서 리턴되는 값을 넣어주는 것이므로 dto의 필드명과 정확히 일치해야 한다. -->
+	</insert>
+	
+	<!--  
+	<update id="update" parameterType="int" >
+		UPDATE member
+		SET name=#{name}, addr=#{addr}
+		WHERE num=#{num}
+	</update>
+	-->
 
 </mapper>
