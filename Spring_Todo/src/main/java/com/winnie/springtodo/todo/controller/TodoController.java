@@ -53,4 +53,12 @@ public class TodoController {
 		return mView;
 	}
 	
+	@RequestMapping("/todo/update")
+	public ModelAndView update(@ModelAttribute("dto") TodoDto dto,
+			ModelAndView mView) {
+		dao.update(dto);
+		mView.setViewName("todo/update");
+		return mView;
+	}
+	
 }

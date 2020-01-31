@@ -9,4 +9,5 @@ public interface TodoDao {
 	public void delete(int num);
 	public void insert(TodoDto dto);
 	public TodoDto getData(int num);
+	public void update(TodoDto dto);
 }

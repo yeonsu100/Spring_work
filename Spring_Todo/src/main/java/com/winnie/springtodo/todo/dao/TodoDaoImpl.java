@@ -36,4 +36,9 @@ public class TodoDaoImpl implements TodoDao {
 		return dto;
 	}
 
+	@Override
+	public void update(TodoDto dto) {
+		session.update("todo.update", dto);
+	}
+
 }
