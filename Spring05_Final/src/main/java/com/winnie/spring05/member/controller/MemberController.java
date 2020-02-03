@@ -16,8 +16,6 @@ import com.winnie.spring05.member.service.MemberService;
 @Controller		// 지금은 타입이 하나이므로 @Controller를 사용하지만  여러개일 경우 @Repository("myOracle") 이런식으로 이름을 붙여 사용할 수 있다.
 public class MemberController {
 	// 의존 객체 주입받기 (DI)
-	@Autowired		// 타입이 하나인 경우 @Autowired 사용
-	private MemberDao dao;
 	@Autowired
 	private MemberService service;
 	
@@ -36,7 +34,7 @@ public class MemberController {
 	@RequestMapping("/member/delete")
 	public String delete(@RequestParam int num) {			// member/delete.do?num=${tmp.num }
 		// MemberDao 객체를 이용해서 회원정보 삭제
-		dao.delete(num);
+		service.deleteMember(num);
 		// 리다일렉트 응답
 		return "redirect:/member/list.do";
 	}
@@ -72,10 +70,8 @@ public class MemberController {
 	@RequestMapping("/member/updateform")
 	public ModelAndView updateform(@RequestParam int num,
 			ModelAndView mView) {
-		// 수정할 회원의 정보를 얻어와서
-		MemberDto dto=dao.getData(num);
-		// "dto"라는 키값으로 request영역에 담기도록하고
-		mView.addObject("dto", dto);
+		// ModelAndView 객체에 회원정보가 담기도록 서비스의 메소드 호출 (dao를 직접 의존하지 않고 서비스에 떠 넘긴다)
+		service.getMember(mView, num);
 		// view page로 forward 이동해서 수정할 회원의 정보를 출력한다.
 		mView.setViewName("member/updateform");
 		return mView;
@@ -83,7 +79,8 @@ public class MemberController {
 	@RequestMapping("/member/update")
 	public ModelAndView update(@ModelAttribute("dto") MemberDto dto,
 			ModelAndView mView) {
-		dao.update(dto);
+		// 회원정보가 수정되도록 서비스의 메소드 호출
+		service.updateMember(dto);
 		mView.setViewName("member/update");
 		return mView;
 	}
