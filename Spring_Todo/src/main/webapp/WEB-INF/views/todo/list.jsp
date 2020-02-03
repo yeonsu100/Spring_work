@@ -49,5 +49,17 @@
 	<h3><a href="insertform.do">Add an assignment</a></h3>
 </div>
 
+<form name="form1" method="post" action="list.do">
+
+        <option value="content" 
+			<c:if test="${map.search_option == 'content'}">selected</c:if>
+        >Search...</option>
+
+    </select>
+    <input name="keyword" value="${map.keyword}">
+    <input type="submit" value="search">
+</form>
+
+
 </body>
 </html>
