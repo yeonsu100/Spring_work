@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	<select id="getList" resultType="com.winnie.spring05.member.dto.MemberDto">
+	<select id="getList" resultType="memberDto">
 		SELECT num, name, addr
 		FROM member
 		ORDER BY num ASC
@@ -12,20 +12,20 @@
 		WHERE num=#{num}
 	</delete>
 	
-	<insert id="insert" parameterType="com.winnie.spring05.member.dto.MemberDto">
+	<insert id="insert" parameterType="memberDto">
 		INSERT INTO member
 		(num, name, addr)
 		VALUES(member_seq.NEXTVAL, #{name}, #{addr})		
 			<!-- dto.getName(), dto.getAddr()을 호출해서 리턴되는 값을 넣어주는 것이므로 dto의 필드명과 정확히 일치해야 한다. -->
 	</insert>
 	
-	<select id="getData" parameterType="int" resultType="com.winnie.spring05.member.dto.MemberDto">
+	<select id="getData" parameterType="int" resultType="memberDto">
 		SELECT num, name, addr
 		FROM member
 		WHERE num=#{num}
 	</select>
 
-	<update id="update" parameterType="com.winnie.spring05.member.dto.MemberDto">
+	<update id="update" parameterType="memberDto">
 		UPDATE member
 		SET name=#{name}, addr=#{addr}
 		WHERE num=#{num}
