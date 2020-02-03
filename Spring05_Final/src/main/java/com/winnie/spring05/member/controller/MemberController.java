@@ -11,21 +11,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.winnie.spring05.member.dao.MemberDao;
 import com.winnie.spring05.member.dto.MemberDto;
+import com.winnie.spring05.member.service.MemberService;
 
 @Controller		// 지금은 타입이 하나이므로 @Controller를 사용하지만  여러개일 경우 @Repository("myOracle") 이런식으로 이름을 붙여 사용할 수 있다.
 public class MemberController {
 	// 의존 객체 주입받기 (DI)
 	@Autowired		// 타입이 하나인 경우 @Autowired 사용
 	private MemberDao dao;
+	@Autowired
+	private MemberService service;
 	
 	// 회원 목록보기 요청 (/member/list.do)을 처리할 컨트롤러의 메소드
 	@RequestMapping("/member/list")
 	public ModelAndView list(ModelAndView mView) {
-		// 회원 목록을 얻어오려면?
-		List<MemberDto> list=dao.getList();
-		
-		mView.addObject("list", list);
+		// MemberServiceImpl 객체를 이용해서 비즈니스 로직 처리
+		service.getList(mView);
+		// view page 정보를 담고
 		mView.setViewName("member/list");		// WEB-INF/views/member/list.jsp 를 의미한다
+		// Model과 view page 정보가 담긴 객체를 리턴해준다.
 		return mView;
 	}
 	
