@@ -36,7 +36,7 @@
 			</c:when>
 			<c:otherwise>
 				<p class="navbar-text pull-right">
-				Signed as <strong><a class="navbar-link" href="${pageContext.request.contextPath }/users/private/info.do">${id }</a></strong>
+				Signed as <strong><a class="navbar-link" href="${pageContext.request.contextPath }/users/info.do">${id }</a></strong>
 				<a class="navbar-link" href="${pageContext.request.contextPath }/users/logout.do">Signed Out</a>
 				</p>
 			</c:otherwise>

@@ -63,9 +63,9 @@
 		<input type="hidden" name="url" value="${url }" />
 		<h2 class="form-signin-heading">Sign In</h2>
 		<label for="id" class="sr-only">ID</label>
-		<input type="text" id="id" name="id" class="form-control" placeholder="User ID..." value="${savedId }" />
+		<input type="text" id="id" name="id" class="form-control" placeholder="User ID..." value="${savedId }" /> </br>
 		<label for="pwd" class="sr-only">Password</label>
-		<input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password..." value="${savedPwd }">
+		<input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password..." value="${savedPwd }"> </br> 
 	
 		<div class="checkbox">
 			<label>

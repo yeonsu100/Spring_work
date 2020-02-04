@@ -124,4 +124,24 @@ public class UsersController {
 		return mView;
 	}
 	
+	// 로그아웃 처리 (redirect 이동)
+	@RequestMapping("/users/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/home.do";
+	}
+	
+	// 개인정보 보기 요청 처리 (로그인을 해야만 이 로직이 보이도록 AOP를 적용하여 거를 것이다.)
+	@RequestMapping("/users/info")
+	public ModelAndView authInfo(HttpServletRequest request, ModelAndView mView) {
+		// 로그인된 아이디 읽어오기
+		String id=(String)request.getSession().getAttribute("id");
+		// UsersService 객체를 이용해서 개인정보를 ModelAndView 객체에 담기도록 한다.
+		service.showInfo(id, mView);
+		// view page 정보를 담고
+		mView.setViewName("users/info");
+		// ModelAndView 객체를 리턴해준다.
+		return mView;
+	}
+	
 }
