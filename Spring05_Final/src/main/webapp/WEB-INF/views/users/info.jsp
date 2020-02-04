@@ -19,8 +19,8 @@
 	}
 	/* 프로필 이미지가 가로 세로 50px인 원형으로 표시될 수 있도록 */
 	#profileLink img{
-		width: 50px;
-		height: 50px;
+		width: 80px;
+		height: 80px;
 		border-radius: 50%;
 	}
 	#profileForm{
