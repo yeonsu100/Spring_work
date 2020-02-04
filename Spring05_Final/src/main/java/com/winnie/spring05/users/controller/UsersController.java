@@ -1,6 +1,7 @@
 package com.winnie.spring05.users.controller;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.winnie.spring05.users.dto.UsersDto;
@@ -141,6 +143,35 @@ public class UsersController {
 		// view page 정보를 담고
 		mView.setViewName("users/info");
 		// ModelAndView 객체를 리턴해준다.
+		return mView;
+	}
+	
+	/*
+	 * [파일 업로드 설정]
+	 * 
+	 * 1. pom.xml에 commons-fileupload, commons-io dependency 명시하기
+	 * 2. servlet-context.xml에 CommonsMultipartResolver bean 설정
+	 * 3. MultipartFile 객체 활용
+	 * 4. upload할 폴더 만들기
+	 */
+	// ajax 파일 업로드 처리, JSON 문자열을 리턴해주어야 한다.
+	@ResponseBody
+	@RequestMapping(value="/users/profile_upload", method=RequestMethod.POST)
+	public Map<String, Object> profileUpload(HttpServletRequest request, 
+										@RequestParam MultipartFile profileImage){
+		String path=service.saveProfileImage(request, profileImage);
+		/*
+		 * {"savedPath":"/upload/xxx.jpg"} 형식의 JSON 문자열을 리턴해주도록 Map 객체를 구성해서 리턴해준다.
+		 */
+		Map<String, Object> map=new HashMap<>();
+		map.put("savedPath", path);
+		return map;
+	}
+	
+	// 비밀번호 수정하기 폼 요청 처리
+	@RequestMapping("/users/pwd_updateform")
+	public ModelAndView authPwdForm(HttpServletRequest request, ModelAndView mView) {
+		mView.setViewName("users/pwd_updateform");
 		return mView;
 	}
 	

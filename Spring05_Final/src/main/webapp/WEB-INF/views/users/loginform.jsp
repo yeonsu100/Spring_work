@@ -57,7 +57,7 @@
 	.bgimg {
 	    border: 0;
 	    padding: 0; 
-	    background-image: url('${pageContext.request.contextPath }/resources/images/castle.jpg');
+	    background-image: url('${pageContext.request.contextPath }/resources/images/sleeping_beauty_castle.jpg');
 	    opacity: 80%;
 	    min-height: 100%;
 	    background-position: center;
