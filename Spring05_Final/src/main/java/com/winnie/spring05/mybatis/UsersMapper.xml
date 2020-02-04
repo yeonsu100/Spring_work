@@ -36,4 +36,9 @@
 		SET pwd=#{pwd}
 		WHERE id=#{id}
 	</update>
+	
+	<delete id="deleteId" parameterType="String">
+		DELETE FROM users
+		WHERE id=#{id}
+	</delete>
 </mapper>

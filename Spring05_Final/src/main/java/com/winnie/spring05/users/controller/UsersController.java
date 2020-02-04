@@ -196,4 +196,11 @@ public class UsersController {
 		return mView;
 	}
 	
+	// 회원 계정 삭제하는 요청 처리
+	@RequestMapping("/users/delete")
+	public ModelAndView authDelete(HttpServletRequest request) {
+		service.deleteAccount(request.getSession());
+		return new ModelAndView("users/delete");
+	}
+	
 }
