@@ -8,14 +8,12 @@
 <jsp:include page="../include/resource.jsp"></jsp:include>
 
 <style>
-	/* stylelint-disable selector-no-qualifying-type, property-no-vendor-prefix */
-	
 	body {
 	  padding-top: 40px;
 	  padding-bottom: 40px;
-	  background-color: #FFE1E1;
 	}
-	
+	h2{color:#C0DAFF;}
+	.container{padding-top: 100px;}
 	.form-signin {
 	  max-width: 330px;
 	  padding: 15px;
@@ -27,6 +25,7 @@
 	}
 	.form-signin .checkbox {
 	  font-weight: 400;
+	  color: #C0DAFF;
 	}
 	.form-signin .form-control {
 	  position: relative;
@@ -50,11 +49,32 @@
 	  border-top-left-radius: 0;
 	  border-top-right-radius: 0;
 	}
+	body, html { 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+	}
+	.bgimg {
+	    border: 0;
+	    padding: 0; 
+	    background-image: url('${pageContext.request.contextPath }/resources/images/castle.jpg');
+	    opacity: 80%;
+	    min-height: 100%;
+	    background-position: center;
+	    background-size: cover;
+	}
+	#bg {
+	  position: fixed; 
+	  top: 0; 
+	  left: 0; 
+	  min-width: 100%;
+	  min-height: 100%;
+	}
 </style>
 
 </head>
 <body>
-
+<div class="bgimg">
 
 <div class="container">
 	<h1>SIGN IN page</h1>
