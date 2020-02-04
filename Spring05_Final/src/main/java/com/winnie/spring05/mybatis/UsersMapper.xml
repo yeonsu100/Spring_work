@@ -13,4 +13,9 @@
 		VALUES(#{id}, #{pwd}, #{email}, SYSDATE)
 	</insert>
 
+	<select id="getPwdHash" parameterType="String" resultType="String">
+		SELECT pwd
+		FROM users
+		WHERE id=#{inputId}
+	</select>
 </mapper>

@@ -1,9 +1,12 @@
 package com.winnie.spring05.users.controller;
 
+import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,4 +83,45 @@ public class UsersController {
 		request.setAttribute("savedPwd", savedPwd);
 		return "users/loginform";
 	}
+	
+	// 로그인 요청 처리 
+	// (그리고 로그인을 하고 나면, 로그인 후 이동할 목적지 정보(url정보)가 필요하다.)
+	// 쿠키 기능 추가 (아이디, 비밀번호 저장)
+	@RequestMapping(value="/users/login", method=RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute UsersDto dto,
+								ModelAndView mView, 
+								HttpServletRequest request,
+								HttpServletResponse response) {
+		// 목적지 정보
+		String url=request.getParameter("url");
+		if(url==null){
+			url=request.getContextPath()+"/home.do";
+		}
+		// 목적지 정보를 미리 인코딩 해 놓는다.
+		String encodedUrl=URLEncoder.encode(url);
+		// view page 에 전달하기 
+		mView.addObject("url", url);
+		mView.addObject("encodedUrl", encodedUrl);	
+		// 아이디 비밀번호 저장 체크박스를 체크 했는지 읽어와 본다.
+		String isSave=request.getParameter("isSave");	
+		// 아이디, 비밀번호를 쿠키에 저장
+		Cookie idCook=new Cookie("savedId", dto.getId());
+		Cookie pwdCook=new Cookie("savedPwd", dto.getPwd());
+		if(isSave != null){ 		// null 이 아니면 체크 한 것이다.
+			// 한달 동안 저장하기
+			idCook.setMaxAge(60*60*24*30);
+			pwdCook.setMaxAge(60*60*24*30);
+		}else{
+			// 쿠키 지우기 
+			idCook.setMaxAge(0);
+			pwdCook.setMaxAge(0);
+		}
+		// 응답할 때 쿠키도 심어지도록
+		response.addCookie(idCook);
+		response.addCookie(pwdCook);
+		service.validUser(dto, request.getSession(), mView);	
+		mView.setViewName("users/login");
+		return mView;
+	}
+	
 }
