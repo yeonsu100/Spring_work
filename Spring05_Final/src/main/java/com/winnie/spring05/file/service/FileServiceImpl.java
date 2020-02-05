@@ -17,7 +17,7 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public void list(HttpServletRequest request) {
-		//페이징 처리 로직
+		// 페이징 처리 로직
 		// 한 페이지에 나타낼 row 의 갯수
 		final int PAGE_ROW_COUNT=5;
 		// 하단 디스플레이 페이지 갯수

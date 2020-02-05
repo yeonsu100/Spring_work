@@ -23,6 +23,11 @@ public class FileController {
 		return mView;
 	}
 	
-	
+	// 파일 업로드 폼 요청 처리
+	@RequestMapping("/file/uplaod_form")
+	public ModelAndView authUploadForm(HttpServletRequest request) {
+		
+		return new ModelAndView("file/uplaod_form");
+	}
 	
 }
