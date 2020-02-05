@@ -139,7 +139,7 @@ public class UsersController {
 		// 로그인된 아이디 읽어오기
 		String id=(String)request.getSession().getAttribute("id");
 		// UsersService 객체를 이용해서 개인정보를 ModelAndView 객체에 담기도록 한다.
-		service.showInfo(id, mView);
+		service.showInfo(request.getSession(), mView);
 		// view page 정보를 담고
 		mView.setViewName("users/info");
 		// ModelAndView 객체를 리턴해준다.
@@ -201,6 +201,34 @@ public class UsersController {
 	public ModelAndView authDelete(HttpServletRequest request) {
 		service.deleteAccount(request.getSession());
 		return new ModelAndView("users/delete");
+	}
+	
+	// 계정 정보 수정하는 폼 요청 처리 (내가 한 것)
+	@RequestMapping("/users/updateform")
+	public ModelAndView authUpdateForm(HttpServletRequest request, ModelAndView mView) {
+		service.showInfo(request.getSession(), mView);
+		mView.setViewName("users/updateform");
+		return mView;
+	}
+	
+	// 계정 정보 수정하는 폼 요청 처리 (선생님이랑 수업시간에 한 것)
+//	@RequestMapping("/users/updateform")
+//	public ModelAndView authUpdateform(HttpServletRequest request, ModelAndView mView) {
+//		// 세션 영역에서 로그인된 id를 읽어와서
+//		String id=(String)request.getSession().getAttribute("id");
+//		// 서비스 메소드를 호출해서 ModelAndView 객체에 회원정보가 담기게 하고
+//		service.showInfo(request.getSession(), mView);
+//		// view page 설정한 다음
+//		mView.setViewName("users/updateform");
+//		// 리턴해준다.
+//		return mView;
+//	}
+	
+	// 계정 정보 수정 요청 처리
+	@RequestMapping("/users/update")
+	public ModelAndView authUpdate(@ModelAttribute UsersDto dto, HttpServletRequest request) {
+		service.updateAccount(dto);
+		return new ModelAndView("redirect:/users/info.do");
 	}
 	
 }
