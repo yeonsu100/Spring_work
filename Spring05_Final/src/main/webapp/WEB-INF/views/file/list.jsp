@@ -66,7 +66,7 @@
 		</tbody>
 	</table>
 	
-	<h3><a href="${pageContext.request.contextPath }/file/upload_form.do">File Upload</a></h3>
+	<h3><a href="upload_form.do">Upload a File</a></h3>
 	
 	<div class="page-display">
 		<ul class="pagination pagination-sm">

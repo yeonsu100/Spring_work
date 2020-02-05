@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/file/private/upload_form.jsp</title>
+<title>/file/upload_form.jsp</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 </head>
 <body>

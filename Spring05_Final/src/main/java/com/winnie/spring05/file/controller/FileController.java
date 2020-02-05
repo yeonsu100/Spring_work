@@ -4,9 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.winnie.spring05.file.dto.FileDto;
 import com.winnie.spring05.file.service.FileService;
 
 @Controller
@@ -24,10 +27,17 @@ public class FileController {
 	}
 	
 	// 파일 업로드 폼 요청 처리
-	@RequestMapping("/file/uplaod_form")
+	@RequestMapping("/file/upload_form")
 	public ModelAndView authUploadForm(HttpServletRequest request) {
 		
-		return new ModelAndView("file/uplaod_form");
+		return new ModelAndView("file/upload_form");
+	}
+	
+	// 파일 업로드 요청 처리
+	@RequestMapping(value = "/file/upload", method = RequestMethod.POST)
+	public ModelAndView authUpload(HttpServletRequest request, @ModelAttribute FileDto dto) {
+		service.saveFile(request, dto);
+		return new ModelAndView("redirect:/file/list.do");
 	}
 	
 }
