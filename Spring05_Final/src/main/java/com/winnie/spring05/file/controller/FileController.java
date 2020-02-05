@@ -53,4 +53,12 @@ public class FileController {
 		return mView;
 	}
 	
+	// 파일 삭제 요청 처리
+	@RequestMapping("/file/delete")
+	public ModelAndView authDelete(HttpServletRequest request) {
+		service.removeFile(request);
+		return new ModelAndView("redirect:/file/list.do");
+	}
+	
+	
 }

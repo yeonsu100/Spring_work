@@ -11,4 +11,5 @@ public interface FileService {
 	public void saveFile(HttpServletRequest request, FileDto dto);
 	public void getFileData(ModelAndView mView, int num);
 	public void addDownCount(int num);
+	public void removeFile(HttpServletRequest request);
 }
