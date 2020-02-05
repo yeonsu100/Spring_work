@@ -225,10 +225,11 @@ public class UsersController {
 //	}
 	
 	// 계정 정보 수정 요청 처리
-	@RequestMapping("/users/update")
+	@RequestMapping(value="/users/update", method=RequestMethod.POST)
 	public ModelAndView authUpdate(@ModelAttribute UsersDto dto, HttpServletRequest request) {
 		service.updateAccount(dto);
 		return new ModelAndView("redirect:/users/info.do");
 	}
+	
 	
 }

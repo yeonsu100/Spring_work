@@ -57,7 +57,8 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void showInfo(String id, ModelAndView mView) {
+	public void showInfo(HttpSession session, ModelAndView mView) {
+		String id=(String)session.getAttribute("id");
 		UsersDto dto=dao.getData(id);
 		mView.addObject("dto", dto);
 	}
@@ -125,6 +126,11 @@ public class UsersServiceImpl implements UsersService{
 		dao.delete(id);
 		// 그런다음 로그아웃
 		session.invalidate();
+	}
+
+	@Override
+	public void updateAccount(UsersDto dto) {
+		dao.updateAccount(dto);
 	}
 
 
