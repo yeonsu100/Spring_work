@@ -54,7 +54,7 @@ public class UsersDaoImpl implements UsersDao{
 
 	@Override
 	public void delete(String id) {
-		session.delete("users.deleteId", id);
+		session.delete("users.delete", id);
 	}
 
 	@Override

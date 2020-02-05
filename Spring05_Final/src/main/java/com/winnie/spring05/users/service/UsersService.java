@@ -17,6 +17,6 @@ public interface UsersService {
 	public void showInfo(HttpSession session, ModelAndView mView);
 	public String saveProfileImage(HttpServletRequest request, MultipartFile mFile);
 	public void updatePassword(UsersDto dto, ModelAndView mView);		// dto에 id, pwd, new pwd 세개의 정보를 담아 전달할 것
-	public void deleteAccount(HttpSession session);
+	public void deleteAccount(String id);
 	public void updateAccount(UsersDto dto);
 }

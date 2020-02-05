@@ -196,11 +196,25 @@ public class UsersController {
 		return mView;
 	}
 	
-	// 회원 계정 삭제하는 요청 처리
+	// 회원 계정 삭제하는 요청 처리 (내가 한 것)
+//	@RequestMapping("/users/delete")
+//	public ModelAndView authDelete(HttpServletRequest request) {
+//		service.deleteAccount(request.getSession());
+//		return new ModelAndView("users/delete");
+//	}
+	
+	// 회원 계정 삭제하는 요청 처리 (선생님이랑 수업시간에 한 것)
 	@RequestMapping("/users/delete")
-	public ModelAndView authDelete(HttpServletRequest request) {
-		service.deleteAccount(request.getSession());
-		return new ModelAndView("users/delete");
+	public ModelAndView authDelete(HttpServletRequest request, ModelAndView mView) {
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		// 서비스를 이용해서 해당 회원 정보 삭제
+		service.deleteAccount(id);
+		// 로그아웃 처리
+		session.invalidate();
+		mView.addObject("id", id);
+		mView.setViewName("users/delete");
+		return mView;
 	}
 	
 	// 계정 정보 수정하는 폼 요청 처리 (내가 한 것)
