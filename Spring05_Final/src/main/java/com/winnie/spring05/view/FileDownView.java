@@ -25,7 +25,7 @@ import com.winnie.spring05.file.dto.FileDto;
  */
 
 @Component("fileDownView")		// bean의 이름 지정하기 (임의 지정 가능)
-public class FileDownView extends AbstractView{				// AbstractView 추상 클래스 상속
+public class FileDownView extends AbstractView{		// AbstractView 추상 클래스 상속
 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
@@ -48,7 +48,6 @@ public class FileDownView extends AbstractView{				// AbstractView 추상 클래
 		FileInputStream fis=new FileInputStream(path);
 		
 		// 다운로드 시켜주는 작업을 한다. (실제 파일 데이터와 원본파일명을 보내줘야한다.)
-		// 다운로드 시켜주는 작업을 한다. 
 		String encodedName=null;
 		System.out.println(request.getHeader("User-Agent"));
 		// 한글 파일명 세부처리 
