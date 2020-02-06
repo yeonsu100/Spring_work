@@ -8,6 +8,7 @@
  		<typeAlias type="com.winnie.spring05.member.dto.MemberDto" alias="memberDto"/>
  		<typeAlias type="com.winnie.spring05.users.dto.UsersDto" alias="usersDto"/>
  		<typeAlias type="com.winnie.spring05.file.dto.FileDto" alias="fileDto"/>
+ 		<typeAlias type="com.winnie.spring05.cafe.dto.CafeDto" alias="cafeDto"/>
  	</typeAliases>
  	
  	<!-- mapper 설정 -->
@@ -15,5 +16,6 @@
  		<mapper resource="com/winnie/spring05/mybatis/MemberMapper.xml" />
  		<mapper resource="com/winnie/spring05/mybatis/UsersMapper.xml" />
  		<mapper resource="com/winnie/spring05/mybatis/FileMapper.xml" />
+ 		<mapper resource="com/winnie/spring05/mybatis/CafeMapper.xml" />
  	</mappers>
  </configuration>
