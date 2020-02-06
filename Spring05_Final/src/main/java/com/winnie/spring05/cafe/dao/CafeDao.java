@@ -1,5 +1,10 @@
 package com.winnie.spring05.cafe.dao;
 
-public interface CafeDao {
+import java.util.List;
 
+import com.winnie.spring05.cafe.dto.CafeDto;
+
+public interface CafeDao {
+	public int getCount(CafeDto dto);
+	public List<CafeDto> getList(CafeDto dto);
 }

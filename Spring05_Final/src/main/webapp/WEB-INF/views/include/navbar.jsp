@@ -7,7 +7,9 @@
 	<div class="container">
 	<!-- 홈페이지(인덱스) 링크와 버튼을 넣어둘 div -->
 	<div class="navbar-header">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }/home.do">HOME</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath }/home.do">
+			<span class="glyphicon glyphicon-home"></span>
+		</a>
 		<button class="navbar-toggle"
 				data-toggle="collapse"
 				data-target="#one">
@@ -22,7 +24,7 @@
 		<!-- 네비 바 목록 (절대경로를 쓰는 것이 좋다) -->
 		<ul class="nav navbar-nav">
 			<li <c:if test="${param.category eq 'cafe' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/cafe/list.do">Cafe</a></li>
-			<li <c:if test="${param.category eq 'file' }">class="active" </c:if>><a href="${pageContext.request.contextPath }/file/list.do">Web hard</a></li>
+			<li <c:if test="${param.category eq 'file' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/file/list.do">Web hard</a></li>
 			<li><a href="https://www.youtube.com">YouTube</a></li>
 			<li><a href="https://www.instagram.com/yunstagram_100/">Yunstagram</a></li>
 		</ul>
