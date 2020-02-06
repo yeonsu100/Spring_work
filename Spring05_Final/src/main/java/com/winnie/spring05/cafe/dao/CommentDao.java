@@ -1,5 +1,9 @@
 package com.winnie.spring05.cafe.dao;
 
-public interface CommentDao {
+import java.util.List;
 
+import com.winnie.spring05.cafe.dto.CommentDto;
+
+public interface CommentDao {
+	public List<CommentDto> getList(int parentNum);
 }

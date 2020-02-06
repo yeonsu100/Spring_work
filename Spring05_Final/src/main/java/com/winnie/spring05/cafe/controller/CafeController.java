@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.winnie.spring05.cafe.dto.CafeDto;
@@ -32,6 +33,18 @@ public class CafeController {
 		String id=(String)request.getSession().getAttribute("id");
 		dto.setWriter(id);
 		service.saveContent(dto);
+		return new ModelAndView("redirect:/cafe/list.do");
+	}
+	
+	@RequestMapping("/cafe/detail")
+	public ModelAndView detail(HttpServletRequest request) {
+		service.getDetail(request);
+		return new ModelAndView("cafe/detail");
+	}
+	
+	@RequestMapping("/cafe/delete")
+	public ModelAndView authDelete(@RequestParam int num, HttpServletRequest request) {
+		service.deleteContent(num);
 		return new ModelAndView("redirect:/cafe/list.do");
 	}
 }

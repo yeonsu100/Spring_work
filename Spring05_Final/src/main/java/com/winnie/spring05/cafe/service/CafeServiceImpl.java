@@ -10,12 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.winnie.spring05.cafe.dao.CafeDao;
+import com.winnie.spring05.cafe.dao.CommentDao;
 import com.winnie.spring05.cafe.dto.CafeDto;
+import com.winnie.spring05.cafe.dto.CommentDto;
 
 @Service
 public class CafeServiceImpl implements CafeService {
 	@Autowired
 	private CafeDao dao;
+	@Autowired
+	private CommentDao commentDao;
+	
+	static final int PAGE_ROW_COUNT=10;
+	static final int PAGE_DISPLAY_COUNT=10;
 	
 	@Override
 	public void getList(HttpServletRequest request) {
@@ -43,12 +50,6 @@ public class CafeServiceImpl implements CafeService {
 			request.setAttribute("encodedKeyword", encodedKeyword);
 			request.setAttribute("keyword", keyword);
 		}
-
-		// 페이징 처리 로직
-		// 한 페이지에 나타낼 row 의 갯수
-		final int PAGE_ROW_COUNT=10;
-		// 하단 디스플레이 페이지 갯수
-		final int PAGE_DISPLAY_COUNT=5;
 		
 		// 보여줄 페이지의 번호
 		int pageNum=1;
@@ -93,6 +94,46 @@ public class CafeServiceImpl implements CafeService {
 	@Override
 	public void saveContent(CafeDto dto) {
 		dao.insert(dto);
+	}
+
+	@Override
+	public void getDetail(HttpServletRequest request) {
+		int num=Integer.parseInt(request.getParameter("num"));
+		String keyword=request.getParameter("keyword");
+		String condition=request.getParameter("condition");
+		CafeDto dto=new CafeDto();
+		if(keyword != null) {	
+			if(condition.equals("titlecontent")) {		
+				dto.setTitle(keyword);
+				dto.setContent(keyword);
+			}else if(condition.equals("title")) {
+				dto.setTitle(keyword);
+			}else if(condition.equals("writer")) {
+				dto.setWriter(keyword);
+			}
+			request.setAttribute("condition", condition);
+
+			String encodedKeyword=null;
+			try {
+				encodedKeyword=URLEncoder.encode(keyword, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("encodedKeyword", encodedKeyword);
+			request.setAttribute("keyword", keyword);
+		}		
+		dto.setNum(num);
+
+		CafeDto resultDto=dao.getData(dto);
+		dao.addViewCount(num);
+		request.setAttribute("dto", resultDto);
+		List<CommentDto> commentList=commentDao.getList(num);
+		request.setAttribute("commentList", commentList);
+	}
+
+	@Override
+	public void deleteContent(int num) {
+		dao.delete(num);
 	}
 
 }

@@ -81,7 +81,7 @@
 	
 	<h3><a href="upload_form.do">Upload a File</a></h3>
 	
-	<div class="page-display">
+	<div class="page-display pager">
 		<ul class="pagination pagination-sm">
 		
 		<c:choose>

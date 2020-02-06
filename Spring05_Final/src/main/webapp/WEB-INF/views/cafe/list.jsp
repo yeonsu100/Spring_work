@@ -26,7 +26,7 @@
 	</ol>
 	
 	<h1>Article List</h1>
-	<table class="table table-striped table-condensed">
+	<table class="table table-striped table-condensed table-hover">
 		<colgroup>  <!-- 값을 다 더했을 때 12가 되도록 -->
 			<col class="col-xs-1"/>
 			<col class="col-xs-2"/>
@@ -112,7 +112,7 @@
 	</div>
 	
 	<form action="list.do" method="get" >
-		<label for="condition">검색조건</label>
+		<label for="condition">Search Condition</label>
 		<select name="condition" id="condition">
 			<option value="titlecontent" <c:if test="${condition eq 'titlecontent' }">selected</c:if>>Title OR Content</option>
 			<option value="title" <c:if test="${condition eq 'title' }">selected</c:if>>Title</option>
