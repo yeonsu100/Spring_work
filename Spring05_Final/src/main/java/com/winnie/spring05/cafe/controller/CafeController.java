@@ -61,4 +61,10 @@ public class CafeController {
 		service.update(dto);
 		return new ModelAndView("redirect:/cafe/detail.do?num="+dto.getNum());
 	}
+	
+	@RequestMapping("/cafe/insert_comment")
+	public ModelAndView authCommentInsert(@RequestParam int parentNum, HttpServletRequest request) {
+		service.saveComment(request);
+		return new ModelAndView("redirect:/cafe/detail.do?num="+parentNum);
+	}
 }

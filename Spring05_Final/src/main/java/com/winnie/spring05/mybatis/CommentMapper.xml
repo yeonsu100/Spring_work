@@ -12,4 +12,10 @@
 		SELECT board_cafe_seq.NEXTVAL
 		FROM DUAL
 	</select>
+	
+	<insert id="insert" parameterType="commentDto">
+		INSERT INTO board_cafe_comment
+		(num, writer, content, parentId, parentNum, regdate )
+		VALUES(#{num}, #{writer}, #{content}, #{parentId}, #{parentNum}, SYSDATE)
+	</insert>
 </mapper>

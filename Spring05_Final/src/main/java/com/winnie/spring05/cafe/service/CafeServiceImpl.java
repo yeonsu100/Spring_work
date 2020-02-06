@@ -148,4 +148,32 @@ public class CafeServiceImpl implements CafeService {
 		dao.update(dto);
 	}
 
+	@Override
+	public void saveComment(HttpServletRequest request) {
+		String writer=(String)request.getSession().getAttribute("id");
+		int parentNum=Integer.parseInt(request.getParameter("parentNum"));
+		String parentId=request.getParameter("parentId");
+		String content=request.getParameter("content");
+		//댓글 내에서의 그룹번호 (null 이면 원글의 댓글이다)
+		//String comment_group=request.getParameter("comment_group");
+		//저장할 댓글의 primary key 값을 미리 얻어낸다. 
+		int seq=commentDao.getSequence();
+		//댓글 정보를 CafeCommentDto 객체에 담는다.
+		CommentDto dto=new CommentDto();
+		dto.setNum(seq);
+		dto.setWriter(writer);
+		dto.setParentId(parentId);
+		dto.setParentNum(parentNum);
+		dto.setContent(content);
+//		if(comment_group == null) { //원글의 댓글인경우
+//			//댓글의 글번호가 댓글 내에서의 그룹번호가 된다. 
+//			dto.setComment_group(seq);
+//		}else {//댓글의 댓글인 경우 
+//			//전달된 comment_group 번호를 새로 추가될 댓글의 그룹번호로 부여한다.
+//			dto.setComment_group(Integer.parseInt(comment_group));
+//		}
+		//댓글 정보를 DB 에 저장한다.
+		commentDao.insert(dto);
+	}
+
 }
