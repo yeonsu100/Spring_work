@@ -131,11 +131,11 @@
 	<form action="list.do" method="get">
 		<label for="condition">Search for...</label>
 		<select name="condition" id="condition">
-			<option value="titlename">Title + File Name</option>
-			<option value="title">Title</option>
-			<option value="writer">Writer</option>
+			<option value="titlename" <c:if test="${condition eq 'titlename' }">selected</c:if> >Title + File Name</option>
+			<option value="title" <c:if test="${condition eq 'title' }">selected</c:if> >Title</option>
+			<option value="writer" <c:if test="${condition eq 'titlename' }">selected</c:if> >Writer</option>
 		</select>
-		<input type="text" name="keyword" id="keyword" placeholder="Enter a Keyword..." />
+		<input type="text" name="keyword" id="keyword" placeholder="Enter a Keyword..." value="${keyword }" />
 		<button type="submit">Search</button>
 	</form>
 	
