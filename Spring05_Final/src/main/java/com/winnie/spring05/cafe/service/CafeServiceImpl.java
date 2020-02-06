@@ -90,4 +90,9 @@ public class CafeServiceImpl implements CafeService {
 		request.setAttribute("totalRow", totalRow);
 	}
 
+	@Override
+	public void saveContent(CafeDto dto) {
+		dao.insert(dto);
+	}
+
 }

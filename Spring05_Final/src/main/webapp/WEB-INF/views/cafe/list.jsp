@@ -10,8 +10,9 @@
 <title>/cafe/list.jsp</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
-	h1{color : #6799FF;}
+	h1{color:#6EE3F7;}
 	h3{color : #FF9090;}
+	thead{background-color:#B2EBF4;}
 </style>
 </head>
 <body>
