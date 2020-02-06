@@ -1,6 +1,8 @@
 package com.winnie.spring05.file.service;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,44 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public void list(HttpServletRequest request) {
+		/*
+		 * request에 검색 keyword가 전달이 될수도 있고 안될수도 있다.
+		 * - 전달이 안되는 경우 : navbar에서 파일 목록보기를 누른 경우
+		 * - 전달 되는 경우 1 : 하단에 검색어를 입력하고 검색 버튼을 누른 경우
+		 * - 전달 되는 경우 2 : 이미 검색을 한 상태에서 하단 페이지 번호를 누른 경우
+		 */
+		// 검색과 관련된 파라미터를 읽어와 본다.
+		String keyword=request.getParameter("keyword");			// 키워드 읽어오기
+		String condition=request.getParameter("condition");		// 검색조건 읽어오기
+		
+		// 검색 키워드가 존재한다면 키워드를 담을 FileDto 객체 생성 
+		FileDto dto=new FileDto();
+		if(keyword != null) {						// 검색 키워드가 전달된 경우 (키워드가 널이 아닌 경우)
+			if(condition.equals("titlename")) {		// 제목+파일명 검색
+				dto.setTitle(keyword);
+				dto.setOrgFileName(keyword);
+			}else if(condition.equals("title")) {	// 제목 검색
+				dto.setTitle(keyword);
+			}else if(condition.equals("writer")) {	// 작성자 검색
+				dto.setWriter(keyword);
+			}
+			/*
+			 *  검색 키워드에는 한글이 포함될 가능성이 있기 때문에
+			 *  링크에 그대로 출력가능하도록 하기 위해 미리 인코딩을 해서 request에 담아준다.
+			 */
+			String encodedKeyword=null;
+			try {
+				encodedKeyword=URLEncoder.encode(keyword, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			// 키워드와 검색조건을 request에 담는다. 
+			// * request에 담는 이유  : 어떤 조건으로 어떤 키워드를 검색했는지를 표시하기 위해 (UI 구성에 사용된다)
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("encodedKeyword", encodedKeyword);
+			request.setAttribute("condition", condition);
+		}			
+		
 		// 페이징 처리 로직
 		// 한 페이지에 나타낼 row 의 갯수
 		final int PAGE_ROW_COUNT=5;
@@ -41,7 +81,7 @@ public class FileServiceImpl implements FileService {
 		int endRowNum=pageNum*PAGE_ROW_COUNT;
 		
 		// 전체 row 의 갯수를 읽어온다.
-		int totalRow=dao.getCount();
+		int totalRow=dao.getCount(dto);
 		// 전체 페이지의 갯수 구하기
 		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
 		// 시작 페이지 번호
@@ -52,7 +92,6 @@ public class FileServiceImpl implements FileService {
 		if(totalPageCount < endPageNum){endPageNum=totalPageCount;}	
 		
 		// CafeDto 객체에 위에서 계산된 startRowNum과 endRowNum을 담는다.
-		FileDto dto=new FileDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
 
@@ -64,6 +103,7 @@ public class FileServiceImpl implements FileService {
 		request.setAttribute("endPageNum", endPageNum);
 		request.setAttribute("totalPageCount", totalPageCount);
 		request.setAttribute("list", list);
+		request.setAttribute("totalRow", totalRow);			// 전체 글의 갯수
 	}
 
 	@Override

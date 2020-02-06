@@ -26,6 +26,19 @@
 	</ol>
 	
 	<h1>List of File</h1>
+	
+	<c:choose>
+		<c:when test="${not empty keyword }">
+			<p>
+				The keyword (<strong>${keyword }</strong>) that you searched is here. </br>
+				Count of it. : <strong>${totalRow }</strong>
+			</p>
+		</c:when>
+		<c:otherwise>
+			<p>Total : <strong>${totalRow }</strong> files are here.</p>
+		</c:otherwise>
+	</c:choose>
+	
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
@@ -74,7 +87,7 @@
 		<c:choose>
 			<c:when test="${startPageNum ne 1 }">
 				<li>
-					<a href="list.do?pageNum=${startPageNum-1 }">&laquo;</a>
+					<a href="list.do?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedKeyword}">&laquo;</a>
 				</li>
 			</c:when>
 			<c:otherwise>
@@ -88,12 +101,12 @@
 			<c:choose>
 				<c:when test="${w eq pageNum }">
 					<li class="active">
-						<a href="list.do?pageNum=${w }">${w }</a>
+						<a href="list.do?pageNum=${w }&condition=${condition}&keyword=${encodedKeyword}">${w }</a>
 					</li>
 				</c:when>
 				<c:otherwise>
 					<li>
-						<a href="list.do?pageNum=${w }">${w }</a>
+						<a href="list.do?pageNum=${w }&condition=${condition}&keyword=${encodedKeyword}">${w }</a>
 					</li>
 				</c:otherwise>
 			</c:choose>	
@@ -102,7 +115,7 @@
 			<c:choose>
 				<c:when test="${endPageNum lt totalPageNum }">
 					<li>
-						<a href="list.do?pageNum=${endPageNum+1 }">&raquo;</a>
+						<a href="list.do?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedKeyword}">&raquo;</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -114,7 +127,19 @@
 
 		</ul>
 	</div>
-</div>
+	
+	<form action="list.do" method="get">
+		<label for="condition">Search for...</label>
+		<select name="condition" id="condition">
+			<option value="titlename">Title + File Name</option>
+			<option value="title">Title</option>
+			<option value="writer">Writer</option>
+		</select>
+		<input type="text" name="keyword" id="keyword" placeholder="Enter a Keyword..." />
+		<button type="submit">Search</button>
+	</form>
+	
+</div>		<!-- /.container -->
 
 <script>
 	// 삭제 여부를 확인하고 삭제를 진행하는 javascript 함수
