@@ -49,7 +49,7 @@
 		VALUES(board_cafe_seq.NEXTVAL, #{writer}, #{title}, #{content}, #{viewCount}, SYSDATE)
 	</insert>
 	
-	<select id="getData" parameterType="int" resultType="cafeDto">
+	<select id="getData" parameterType="cafeDto" resultType="cafeDto">
 		SELECT result1.*
 		FROM (SELECT num, writer, title, content, viewCount, regdate,
 				LAG(num, 1, 0) OVER(ORDER BY num DESC) prevNum,
@@ -70,4 +70,24 @@
 		WHERE num=#{num}
 	</delete>
 	
+	<select id="getData2" parameterType="int" resultType="cafeDto">
+		SELECT result1.*
+		FROM (SELECT num, writer, title, content, viewCount, regdate,
+				LAG(num, 1, 0) OVER(ORDER BY num DESC) prevNum,
+				LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum
+			  FROM board_cafe
+	        <where>
+				<if test="writer != null">
+					OR writer LIKE '%'||#{writer}||'%'
+				</if>
+				<if test="title != null">
+					OR title LIKE '%'||#{title}||'%'
+				</if>
+				<if test="content != null">
+					OR content LIKE '%'||#{content}||'%'
+				</if>
+			</where>
+			  ORDER BY num DESC) result1
+		WHERE num=#{num}
+	</select>
 </mapper>

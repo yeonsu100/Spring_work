@@ -11,4 +11,6 @@ public interface CafeDao {
 	public CafeDto getData(CafeDto dto);
 	public void addViewCount(int num);
 	public void delete(int num);
+	public CafeDto getData2(int num);
+	public void update(CafeDto dto);
 }

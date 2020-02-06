@@ -47,4 +47,18 @@ public class CafeController {
 		service.deleteContent(num);
 		return new ModelAndView("redirect:/cafe/list.do");
 	}
+	
+	@RequestMapping("/cafe/updateform")
+	public ModelAndView authUpdateForm(ModelAndView mView, @RequestParam int num, 
+			HttpServletRequest request) {
+		service.getUpdate(mView, num);
+		mView.setViewName("cafe/updateform");
+		return mView;
+	}
+	
+	@RequestMapping("/cafe/update")
+	public ModelAndView authUpdate(@ModelAttribute CafeDto dto, HttpServletRequest request) {
+		service.update(dto);
+		return new ModelAndView("redirect:/cafe/detail.do?num="+dto.getNum());
+	}
 }

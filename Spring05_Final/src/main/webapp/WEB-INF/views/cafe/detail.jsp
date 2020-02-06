@@ -118,7 +118,7 @@
 	
 	<%-- 본인이 쓴 글일때만 수정기능이 작동하도록 이 링크를 조건부로 출력 (세션이용) --%>
 	<c:if test="${sessionScope.id eq dto.writer }">
-		<a href="private/updateform.do?num=${dto.num }">Revision</a>
+		<a href="updateform.do?num=${dto.num }">Revision</a>
 		<a href="javascript:deleteConfirm()">Delete</a>
 	</c:if>
 	
@@ -155,7 +155,7 @@
 							<pre>${tmp.content }</pre>
 						</dd>
 					</dl>
-					<form class="comment-insert-form" action="private/comment_insert.do" method="post">
+					<form class="comment-insert-form" action="comment_insert.do" method="post">
 						<input type="hidden" name="parentNum" value="${dto.num }" />
 						<input type="hidden" name="parentId" value="${tmp.writer }" />
 						<textarea name="content"><c:if test="${empty id }">Please sign in before leave a comment!</c:if></textarea>
@@ -163,7 +163,7 @@
 					</form>	
 
 					<c:if test="${id eq tmp.writer }">
-						<form class="comment-update-form" action="private/comment_update.do">
+						<form class="comment-update-form" action="comment_update.do">
 							<input type="hidden" name="num" value="${tmp.num }" />
 							<textarea name="content">${tmp.content }</textarea>
 							<button type="submit">REVISION</button>
@@ -179,7 +179,7 @@
 	</ul>
 	<div class="clearfix"></div>
 		<div class="comment_form">
-			<form action="private/comment_insert.do" method="post">
+			<form action="comment_insert.do" method="post">
 				<input type="hidden" name="parentNum" value="${dto.num }"/>
 				<input type="hidden" name="parentId" value="${dto.writer }"/>
 				<textarea name="content"><c:if test="${empty id }">Please sign in before leave a comment!</c:if></textarea>
@@ -230,7 +230,7 @@
 		var isDelete=confirm("Are you sure delete this comment?");
 		if(isDelete){
 			$.ajax({
-				url:"private/comment_delete.do",
+				url:"comment_delete.do",
 				method:"post",
 				data:{"num":num},
 				success:function(responseData){

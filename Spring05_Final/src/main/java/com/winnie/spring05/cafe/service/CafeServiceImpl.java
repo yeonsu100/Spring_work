@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.winnie.spring05.cafe.dao.CafeDao;
 import com.winnie.spring05.cafe.dao.CommentDao;
@@ -134,6 +135,17 @@ public class CafeServiceImpl implements CafeService {
 	@Override
 	public void deleteContent(int num) {
 		dao.delete(num);
+	}
+
+	@Override
+	public void getUpdate(ModelAndView mView, int num) {
+		CafeDto dto=dao.getData2(num);
+		mView.addObject("dto", dto);
+	}
+
+	@Override
+	public void update(CafeDto dto) {
+		dao.update(dto);
 	}
 
 }
