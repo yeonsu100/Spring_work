@@ -19,4 +19,9 @@ public class CafeController {
 		service.getList(request);
 		return new ModelAndView("cafe/list");
 	}
+	
+	@RequestMapping("/cafe/insertform")
+	public ModelAndView authInsertform(HttpServletRequest request) {
+		return new ModelAndView("cafe/insertform");
+	}
 }
