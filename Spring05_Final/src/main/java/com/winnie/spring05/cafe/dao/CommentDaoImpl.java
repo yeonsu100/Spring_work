@@ -21,7 +21,7 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public void insert(CommentDto dto) {
-		session.insert("commentDto.insert", dto);
+		session.insert("comment.insert", dto);
 	}
 
 	@Override

@@ -10,8 +10,8 @@ public interface CafeService {
 	public void getList(HttpServletRequest request);
 	public void saveContent(CafeDto dto);
 	public void getDetail(HttpServletRequest request);
-	public void deleteContent(int num);
-	public void getUpdate(ModelAndView mView, int num);
-	public void update(CafeDto dto);
-	public void saveComment(HttpServletRequest request);
+	public void deleteContent(int num, HttpServletRequest request);
+	public void getUpdate(ModelAndView mView, int num);		// 원글 수정폼 출력에 필요한 메소드
+	public void update(CafeDto dto);						// 원글 수정하는 메소드
+	public void saveComment(HttpServletRequest request);	// 댓글 저장하는 메소드
 }

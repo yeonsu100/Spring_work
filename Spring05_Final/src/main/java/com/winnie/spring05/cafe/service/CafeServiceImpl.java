@@ -14,6 +14,7 @@ import com.winnie.spring05.cafe.dao.CafeDao;
 import com.winnie.spring05.cafe.dao.CommentDao;
 import com.winnie.spring05.cafe.dto.CafeDto;
 import com.winnie.spring05.cafe.dto.CommentDto;
+import com.winnie.spring05.exception.CanNotDeleteException;
 
 @Service
 public class CafeServiceImpl implements CafeService {
@@ -129,17 +130,22 @@ public class CafeServiceImpl implements CafeService {
 		dao.addViewCount(num);
 		request.setAttribute("dto", resultDto);
 		List<CommentDto> commentList=commentDao.getList(num);
-		request.setAttribute("commentList", commentList);
+		request.setAttribute("commentList", commentList);	
 	}
 
 	@Override
-	public void deleteContent(int num) {
+	public void deleteContent(int num, HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		String writer=dao.getData(num).getWriter();
+		if(!id.equals(writer)) {
+			throw new CanNotDeleteException();
+		}
 		dao.delete(num);
 	}
 
 	@Override
 	public void getUpdate(ModelAndView mView, int num) {
-		CafeDto dto=dao.getData2(num);
+		CafeDto dto=dao.getData(num);
 		mView.addObject("dto", dto);
 	}
 
@@ -150,19 +156,35 @@ public class CafeServiceImpl implements CafeService {
 
 	@Override
 	public void saveComment(HttpServletRequest request) {
+		// 댓글 작성자
 		String writer=(String)request.getSession().getAttribute("id");
-		int parentNum=Integer.parseInt(request.getParameter("parentNum"));
-		String parentId=request.getParameter("parentId");
+		// 댓글의 그룹번호
+		int ref_group=Integer.parseInt(request.getParameter("ref_group"));
+		// 댓글의 대상자 아이디
+		String target_id=request.getParameter("target_id");
+		// 댓글의 내용
 		String content=request.getParameter("content");
-		int seq=commentDao.getSequence();
+		// 댓글 내에서의 그룹번호 (null이면 원글의 댓글이다)
+		String comment_group=request.getParameter("comment_group");		
+		// 저장할 댓글의 primary key값이 필요하다
+		int seq = commentDao.getSequence();
+		// 댓글 정보를 Dto에 담기
 		CommentDto dto=new CommentDto();
 		dto.setNum(seq);
 		dto.setWriter(writer);
-		dto.setParentId(parentId);
-		dto.setParentNum(parentNum);
+		dto.setTarget_id(target_id);
 		dto.setContent(content);
-
-		commentDao.insert(dto);
+		dto.setRef_group(ref_group);
+		
+		if(comment_group==null) {			// 원글의 댓글인 경우
+			// 댓글의 글번호가 댓글의 그룹 번호가 된다.
+			dto.setComment_group(seq);
+		}else {								// 댓글의 댓글인 경우
+			// comment_group 번호가 댓글의 그룹번호가 된다.
+			dto.setComment_group(Integer.parseInt(comment_group));
+		}
+		// 댓글 정보를 DB에 저장한다.
+		commentDao.insert(dto);		
 	}
 
 }

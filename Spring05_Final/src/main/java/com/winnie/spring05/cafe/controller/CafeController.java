@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,14 +38,15 @@ public class CafeController {
 	}
 	
 	@RequestMapping("/cafe/detail")
-	public ModelAndView detail(HttpServletRequest request) {
+	public String detail(HttpServletRequest request){
 		service.getDetail(request);
-		return new ModelAndView("cafe/detail");
+		// view page로 forward 이동해서 글 자세히 보기 
+		return "cafe/detail";
 	}
 	
 	@RequestMapping("/cafe/delete")
 	public ModelAndView authDelete(@RequestParam int num, HttpServletRequest request) {
-		service.deleteContent(num);
+		service.deleteContent(num, request);
 		return new ModelAndView("redirect:/cafe/list.do");
 	}
 	
@@ -62,9 +64,10 @@ public class CafeController {
 		return new ModelAndView("redirect:/cafe/detail.do?num="+dto.getNum());
 	}
 	
-	@RequestMapping("/cafe/insert_comment")
-	public ModelAndView authCommentInsert(@RequestParam int parentNum, HttpServletRequest request) {
+	// 댓글 저장 요청 처리
+	@RequestMapping(value = "/cafe/comment_insert", method = RequestMethod.POST)
+	public ModelAndView authCommentInsert(HttpServletRequest request, @RequestParam int ref_group) {
 		service.saveComment(request);
-		return new ModelAndView("redirect:/cafe/detail.do?num="+parentNum);
+		return new ModelAndView("redirect:/cafe/detail.do?num="+ref_group);
 	}
 }

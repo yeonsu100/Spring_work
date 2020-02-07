@@ -15,14 +15,6 @@
 		border: 1px dotted #cecece;
 		box-shadow: 3px 3px 5px 6px #ccc;
 	}
-	/* 글내용의 경계선 표시 */
-	.content{
-		border: 1px dotted #cecece;
-	}
-	/* 글안에 있는 첨부 이미지의 폭 제한 */
-	.content img{
-		max-width: 100%;
-	}
 	/* 댓글에 관련된 css */
 	.comments ul{
 		padding: 0;
@@ -65,6 +57,11 @@
 		position: absolute;
 		top: 10px;
 		left: 30px;
+	}
+	.comments .user-img{
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
 	}
 </style>
 </head>
@@ -123,68 +120,85 @@
 	</c:if>
 	
 	<div class="comments">
-	<ul>
-	<c:forEach items="${commentList }" var="tmp">
-		<c:choose>
-			<c:when test="${tmp.deleted ne 'yes' }">
-				<li class="comment" id="comment${tmp.num }" <c:if test="${tmp.num ne tmp.comment_group }">style="padding-left:50px;"</c:if> >
-					<c:if test="${tmp.num ne tmp.comment_group }">
-						<img class="reply_icon" src="${pageContext.request.contextPath}/resources/images/re.gif"/>
-					</c:if>
-					<dl>
-						<dt>
-							<img src="${pageContext.request.contextPath}/resources/images/user_image.gif"/>
-							<span>${tmp.writer }</span>
-							<c:if test="${tmp.num ne tmp.comment_group }">
-								to <strong>${tmp.target_id }</strong>
-							</c:if>
-							<span>${tmp.regdate }</span>
-							<a href="javascript:" class="reply_link">Leave a Comment Message</a>
-							<c:choose>
-								<c:when test="${id eq tmp.writer }">
-									<a href="javascript:" class="comment-update-link">Revision</a>&nbsp;&nbsp;
-									<a href="javascript:deleteComment(${tmp.num })">Delete</a>
-								</c:when>
-								<c:otherwise>
-									<a href="javascript:">Blind this User</a>
-								</c:otherwise>
-							</c:choose>
-						</dt>
-						<dd>
-							<pre>${tmp.content }</pre>
-						</dd>
-					</dl>
-					<form class="comment-insert-form" action="comment_insert.do" method="post">
-						<input type="hidden" name="parentNum" value="${dto.num }" />
-						<input type="hidden" name="parentId" value="${tmp.writer }" />
-						<textarea name="content"><c:if test="${empty id }">Please sign in before leave a comment!</c:if></textarea>
-						<button type="submit">SAVE</button>
-					</form>	
-
-					<c:if test="${id eq tmp.writer }">
-						<form class="comment-update-form" action="comment_update.do">
-							<input type="hidden" name="num" value="${tmp.num }" />
-							<textarea name="content">${tmp.content }</textarea>
-							<button type="submit">REVISION</button>
-						</form>
-					</c:if>
-				</li>				
-			</c:when>
-			<c:otherwise>
-				<li>It was deleted.</li>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-	</ul>
-	<div class="clearfix"></div>
-		<div class="comment_form">
+		<ul>
+		<c:forEach items="${commentList }" var="tmp">
+			<c:choose>
+				<c:when test="${tmp.deleted ne 'yes' }">
+					<li class="comment" id="comment${tmp.num }" <c:if test="${tmp.num ne tmp.comment_group }">style="padding-left:50px;"</c:if> >
+						<c:if test="${tmp.num ne tmp.comment_group }">
+							<img class="reply_icon" src="${pageContext.request.contextPath}/resources/images/re.gif"/>
+						</c:if>
+						<dl>
+							<dt>
+								<c:choose>
+									<c:when test="${empty tmp.profile }">
+										<img class="user-img" src="${pageContext.request.contextPath}/resources/images/mickey_full.png"/>
+									</c:when>
+									<c:otherwise>
+										<img class="user-img" src="${pageContext.request.contextPath}${tmp.profile}"/>
+									</c:otherwise>
+								</c:choose>
+								
+								<span>${tmp.writer }</span>
+								<c:if test="${tmp.num ne tmp.comment_group }">
+									to <strong>${tmp.target_id }</strong>
+								</c:if>
+								<span>${tmp.regdate }</span>
+								<a href="javascript:" class="reply_link">Reply</a> |
+								<c:choose>
+									<%-- 로그인된 아이디와 댓글의 작성자가 같으면 --%>
+									<c:when test="${id eq tmp.writer }">
+										<a href="javascript:" class="comment-update-link">Revision</a>&nbsp;&nbsp;
+										<a href="javascript:deleteComment(${tmp.num })">Delete</a>
+									</c:when>
+									<c:otherwise>
+										<a href="javascript:">Blind</a>
+									</c:otherwise>
+								</c:choose>
+							</dt>
+							<dd>
+								<pre>${tmp.content }</pre>
+							</dd>
+						</dl>
+						<form class="comment-insert-form" action="comment_insert.do" method="post">
+							<!-- 덧글 그룹 -->
+							<input type="hidden" name="ref_group" value="${dto.num }" />
+							<!-- 덧글 대상 -->
+							<input type="hidden" name="target_id" value="${tmp.writer }" />
+							<input type="hidden" name="comment_group" value="${tmp.comment_group }" />
+							<textarea name="content"><c:if test="${empty id }">Please sign in before leave a comment!</c:if></textarea>
+							<button type="submit">SAVE</button>
+						</form>	
+						<!-- 로그인한 아이디와 댓글의 작성자와 같으면 수정폼 출력 -->				
+						<c:if test="${id eq tmp.writer }">
+							<form class="comment-update-form" action="comment_update.do">
+								<input type="hidden" name="num" value="${tmp.num }" />
+								<textarea name="content">${tmp.content }</textarea>
+								<button type="submit">Revision</button>
+							</form>
+						</c:if>
+					</li>				
+				</c:when>
+				<c:otherwise>
+					<li <c:if test="${tmp.num ne tmp.comment_group }">style="padding-left:50px;"</c:if> >This comment was deleted.</li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		</ul>
+		<div class="clearfix"></div>
+	
+		<!-- 원글에 댓글을 작성할 수 있는 폼 -->
+		<div class="comments_form">
 			<form action="comment_insert.do" method="post">
-				<input type="hidden" name="parentNum" value="${dto.num }"/>
-				<input type="hidden" name="parentId" value="${dto.writer }"/>
-				<textarea name="content"><c:if test="${empty id }">Please sign in before leave a comment!</c:if></textarea>
+				<!-- 댓글의 그룹번호는 원글의 글번호이다. -->
+				<input type="hidden" name="ref_group" value=${dto.num } />
+				<!-- 댓글의 대상자는 원글의 작성자가 된다. -->
+				<input type="hidden" name="target_id" value=${dto.writer } />
+				<textarea name="content"> <c:if test="${empty id }">Please sign in before leave a comment!</c:if> </textarea>
 				<button type="submit">SAVE</button>
 			</form>
 		</div>
+
 	</div>
 </div>
 
