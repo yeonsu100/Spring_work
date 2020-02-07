@@ -3,21 +3,28 @@ package com.winnie.spring05.cafe.dto;
 public class CommentDto {
 	private int num;
 	private String writer;
-	private String content;
-	private String parentId;
-	private int parentNum;
-	private String regdate;
+	private String content;			// 댓글 내용
+	private String target_id;		// 댓글 대상자의 아이디
+	private int ref_group;			// 댓글의 그룹번호 (원 글의 글번호가 댓글의 그룹번호가 된다)
+	private int comment_group;		// 댓글 내에서의 그룹번호 (댓글의 댓글 처리하기 위해 필요)
+	private String deleted;			// 삭제한 댓글인지 여부 "no" | "yes"
+	private String regdate;			
+	private String profile;			// 댓글 작성자의 프로필 이미지 경로를 담을 필드
 	
-	public CommentDto() {}
+	public CommentDto() {}			// 디폴트 생성자
 
-	public CommentDto(int num, String writer, String content, String parentId, int parentNum, String regdate) {
+	public CommentDto(int num, String writer, String content, String target_id, int ref_group, int comment_group,
+			String deleted, String regdate, String profile) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.content = content;
-		this.parentId = parentId;
-		this.parentNum = parentNum;
+		this.target_id = target_id;
+		this.ref_group = ref_group;
+		this.comment_group = comment_group;
+		this.deleted = deleted;
 		this.regdate = regdate;
+		this.profile = profile;
 	}
 
 	public int getNum() {
@@ -44,20 +51,36 @@ public class CommentDto {
 		this.content = content;
 	}
 
-	public String getParentId() {
-		return parentId;
+	public String getTarget_id() {
+		return target_id;
 	}
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
+	public void setTarget_id(String target_id) {
+		this.target_id = target_id;
 	}
 
-	public int getParentNum() {
-		return parentNum;
+	public int getRef_group() {
+		return ref_group;
 	}
 
-	public void setParentNum(int parentNum) {
-		this.parentNum = parentNum;
+	public void setRef_group(int ref_group) {
+		this.ref_group = ref_group;
+	}
+
+	public int getComment_group() {
+		return comment_group;
+	}
+
+	public void setComment_group(int comment_group) {
+		this.comment_group = comment_group;
+	}
+
+	public String getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
 	}
 
 	public String getRegdate() {
@@ -68,4 +91,12 @@ public class CommentDto {
 		this.regdate = regdate;
 	}
 
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	
 }

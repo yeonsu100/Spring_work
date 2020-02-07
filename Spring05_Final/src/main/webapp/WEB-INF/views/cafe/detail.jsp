@@ -83,14 +83,6 @@
 		<p>The keyword (<strong>${keyword }</strong>) that you searched is here.</p>
 	</c:if>
 	
-	<c:if test="${dto.prevNum ne 0 }">
-		<a href="detail.do?num=${dto.prevNum }&condition=${condition}&keyword=${encodedKeyword}">Prev.</a>
-	</c:if>
-	<c:if test="${dto.nextNum ne 0 }">
-		<a href="detail.do?num=${dto.nextNum }&condition=${condition}&keyword=${encodedKeyword}">Next.</a>
-	</c:if>
-	
-	
 	<table class="table table-bordered table-condensed table-hover">
 		<colgroup>			<!-- 값을 다 더했을 때 12가 되도록 -->
 			<col class="col-xs-3"/>
@@ -122,6 +114,13 @@
 		<a href="javascript:deleteConfirm()">Delete</a>
 	</c:if>
 	
+	</br>
+	<c:if test="${dto.prevNum ne 0 }">
+		<a href="detail.do?num=${dto.prevNum }&condition=${condition}&keyword=${encodedKeyword}">&laquo; Previous article</a>
+	</c:if>
+	<c:if test="${dto.nextNum ne 0 }">
+		<a href="detail.do?num=${dto.nextNum }&condition=${condition}&keyword=${encodedKeyword}">Next article &raquo;</a>
+	</c:if>
 	
 	<div class="comments">
 	<ul>

@@ -2,20 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comment">
 	<select id="getList" parameterType="int" resultType="commentDto">
-		SELECT num, writer, content, parentId, parentNum, regdate
-		FROM board_cafe_comment
-		WHERE parentNum=#{num}
+		SELECT num, writer, content, target_id, ref_group, comment_group, 
+				deleted, board_cafe_comment2.regdate, profile
+		FROM board_cafe_comment2
+		INNER JOIN users
+		ON board_cafe_comment2.writer=users.id
+		WHERE ref_group=#{ref_group}
 		ORDER BY num ASC
 	</select>
 	
-	<select id="getSequence" resultType="int">
-		SELECT board_cafe_seq.NEXTVAL
-		FROM DUAL
-	</select>
+	<update id="update" parameterType="commentDto">
+		UPDATE board_cafe_comment2
+		SET content=#{content}
+		WHERE num=#{num}
+	</update>
+	
+	<update id="delete" parameterType="int">
+		UPDATE board_cafe_comment2
+		SET deleted='yes'
+		WHERE num=#{num}
+	</update>
 	
 	<insert id="insert" parameterType="commentDto">
-		INSERT INTO board_cafe_comment
-		(num, writer, content, parentId, parentNum, regdate )
-		VALUES(#{num}, #{writer}, #{content}, #{parentId}, #{parentNum}, SYSDATE)
+		INSERT INTO board_cafe_comment2
+		(num, writer, content, target_id, ref_group, comment_group, regdate)
+		VALUES(#{num}, #{writer}, #{content}, #{target_id}, #{ref_group}, #{comment_group}, SYSDATE)
 	</insert>
+	
+	<select id="getSequence" resultType="int">
+		SELECT board_cafe_comment2_seq.NEXTVAL
+		FROM DUAL
+	</select>
 </mapper>
