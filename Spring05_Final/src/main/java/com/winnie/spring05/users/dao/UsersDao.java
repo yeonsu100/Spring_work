@@ -11,4 +11,5 @@ public interface UsersDao {
 	public void updatePwd(UsersDto dto);
 	public void delete(String id);
 	public void updateAccount(UsersDto dto);
+	public String getProfile(String id);
 }

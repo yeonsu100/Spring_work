@@ -26,7 +26,7 @@ public class UsersServiceImpl implements UsersService{
 	public Map<String, Object> isExistId(String inputId) {
 		boolean isExist=dao.isExist(inputId);
 		Map<String, Object> map=new HashMap<>();
-		map.put("isExist", isExist);
+		map.put("isExist", isExist);	//=> {"isExist":true} or {"isExist":false} 이런식으로 응답된다. 별도의 jsp 페이지 필요X.
 		return map;
 	}
 	
@@ -53,6 +53,9 @@ public class UsersServiceImpl implements UsersService{
 		if(isValid) {
 			// 로그인 처리를 한다.
 			session.setAttribute("id", dto.getId());
+			String profile=dao.getProfile(dto.getId());
+			session.setAttribute("profile", profile);
+			System.out.println(dto.getId()+"|"+profile);
 		}
 	}
 
@@ -95,7 +98,7 @@ public class UsersServiceImpl implements UsersService{
 		dto.setProfile(path);
 		// UsersDao 를 이용해서 DB 에 반영하기 
 		dao.updateProfile(dto);
-		
+		request.getSession().setAttribute("profile", dto.getProfile());
 		// 이미지 경로 리턴해주기 
 		return path;
 	}

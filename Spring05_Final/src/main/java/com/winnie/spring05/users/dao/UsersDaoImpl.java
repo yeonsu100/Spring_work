@@ -62,4 +62,9 @@ public class UsersDaoImpl implements UsersDao{
 		session.update("users.updateAccount", dto);
 	}
 
+	@Override
+	public String getProfile(String id) {
+		return session.selectOne("users.getProfile",id);
+	}
+
 }

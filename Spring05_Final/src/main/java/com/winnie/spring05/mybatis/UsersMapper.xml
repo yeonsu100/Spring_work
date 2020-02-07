@@ -47,4 +47,9 @@
 		SET email=#{email}
 		WHERE id=#{id}
 	</update>
+	
+	<select id="getProfile" parameterType="String" resultType="String">
+ 		select profile from users
+ 		where id=#{id}
+ 	</select>
 </mapper>
