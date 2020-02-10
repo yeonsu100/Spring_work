@@ -25,6 +25,7 @@
 		<ul class="nav navbar-nav">
 			<li <c:if test="${param.category eq 'cafe' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/cafe/list.do">Cafe</a></li>
 			<li <c:if test="${param.category eq 'file' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/file/list.do">Web hard</a></li>
+			<li <c:if test="${param.category eq 'shop' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/shop/list.do">Shop</a></li>
 			<li><a href="https://www.youtube.com">YouTube</a></li>
 			<li><a href="https://www.instagram.com/yunstagram_100/">Yunstagram</a></li>
 		</ul>
