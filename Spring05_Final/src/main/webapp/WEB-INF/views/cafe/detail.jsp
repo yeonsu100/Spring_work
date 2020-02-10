@@ -205,6 +205,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 
 <script>
+	// 댓글 수정 링크를 눌었을 때 실행되는 함수 등록
 	$(".comment-update-link").click(function(){
 		$(this).parent().parent().parent().find(".comment-update-form").slideToggle(200);
 	});
@@ -240,12 +241,13 @@
 	
 	// 댓글 삭제를 눌렀을때 호출되는 함수
 	function deleteComment(num){
-		var isDelete=confirm("Are you sure delete this comment?");
+		var isDelete=confirm("If you click on confirm button, this comment will be removed.");
 		if(isDelete){
+			// 페이지 전환 없이 ajax 요청을 통해 삭제하기
 			$.ajax({
-				url:"comment_delete.do",
+				url:"comment_delete.do",			// 이 요청의 경로 : "/cafe/comment_delete.do"
 				method:"post",
-				data:{"num":num},
+				data:{"num":num},					// num이라는 파라미터명으로 삭제할 댓글의 번호 전송
 				success:function(responseData){
 					if(responseData.isSuccess){
 						var sel="#comment"+num;
@@ -273,6 +275,7 @@
 		.find(".comment-insert-form")
 		.slideToggle(200);
 		
+		// 답글 <=> 취소가 서로 토글 되도록 한다.
 		if($(this).text()=="Reply"){
 			$(this).text("Cacel");
 		}else{
