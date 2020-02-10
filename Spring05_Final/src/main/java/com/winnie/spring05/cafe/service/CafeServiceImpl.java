@@ -192,4 +192,9 @@ public class CafeServiceImpl implements CafeService {
 		commentDao.delete(num);
 	}
 
+	@Override
+	public void updateComment(CommentDto dto) {
+		commentDao.update(dto);
+	}
+
 }
