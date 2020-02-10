@@ -23,11 +23,14 @@
 	<div class="collapse navbar-collapse" id="one">
 		<!-- 네비 바 목록 (절대경로를 쓰는 것이 좋다) -->
 		<ul class="nav navbar-nav">
-			<li <c:if test="${param.category eq 'cafe' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/cafe/list.do">Cafe</a></li>
-			<li <c:if test="${param.category eq 'file' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/file/list.do">Web hard</a></li>
-			<li <c:if test="${param.category eq 'shop' }">class="active" </c:if>> <a href="${pageContext.request.contextPath }/shop/list.do">Shop</a></li>
-			<li><a href="https://www.youtube.com">YouTube</a></li>
-			<li><a href="https://www.instagram.com/yunstagram_100/">Yunstagram</a></li>
+			<li <c:if test="${param.category eq 'cafe' }">class="active" </c:if>> 
+				<a href="${pageContext.request.contextPath }/cafe/list.do">Cafe <span class="glyphicon glyphicon-pencil"></span></a></li>
+			<li <c:if test="${param.category eq 'file' }">class="active" </c:if>> 
+				<a href="${pageContext.request.contextPath }/file/list.do">Web hard <span class="glyphicon glyphicon-folder-open"></span></a></li>
+			<li <c:if test="${param.category eq 'shop' }">class="active" </c:if>> 
+				<a href="${pageContext.request.contextPath }/shop/list.do">Shop <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+			<li><a href="https://www.youtube.com">YouTube <span class="glyphicon glyphicon-expand"></span></a></li>
+			<li><a href="https://www.instagram.com/yunstagram_100/">Yunstagram <span class="glyphicon glyphicon-thumbs-up"></span></a></li>
 		</ul>
 		
 		<c:choose>
