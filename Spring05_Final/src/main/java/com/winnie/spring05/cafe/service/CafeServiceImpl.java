@@ -145,12 +145,15 @@ public class CafeServiceImpl implements CafeService {
 
 	@Override
 	public void getUpdate(ModelAndView mView, int num) {
+		// 수정할 글번호를 이용해서 수정할 글정보를 얻어와서
 		CafeDto dto=dao.getData(num);
+		// ModelAndView 객체에 담는다.
 		mView.addObject("dto", dto);
 	}
 
 	@Override
 	public void update(CafeDto dto) {
+		// CafeDao 객체를 이용해서 원글을 수정 반영한다.
 		dao.update(dto);
 	}
 
