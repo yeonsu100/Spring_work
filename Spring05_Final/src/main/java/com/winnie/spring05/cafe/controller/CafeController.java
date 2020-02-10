@@ -79,7 +79,7 @@ public class CafeController {
 	@ResponseBody
 	@RequestMapping(value="/cafe/comment_delete", method = RequestMethod.POST)
 	public Map<String, Object> authCommentDelete(HttpServletRequest request, @RequestParam int num){
-		
+		service.deleteComment(num);
 		Map<String, Object> map=new HashMap<>();
 		map.put("isSuccess", true);
 		return map;				// {"isSuccess" : true} 형식의 JSON 문자열이 응답된다.
