@@ -22,7 +22,7 @@
 	<!-- xs 영역에서는 숨겨졌다가 버튼을 누르면 나오게 할 컨텐츠를 넣을 div -->
 	<div class="collapse navbar-collapse" id="one">
 		<!-- 네비 바 목록 (절대경로를 쓰는 것이 좋다) -->
-		<ul class="nav navbar-nav">
+		<ul class="nav navbar-nav ">
 			<li <c:if test="${param.category eq 'cafe' }">class="active" </c:if>> 
 				<a href="${pageContext.request.contextPath }/cafe/list.do">Cafe <span class="glyphicon glyphicon-pencil"></span></a></li>
 			<li <c:if test="${param.category eq 'file' }">class="active" </c:if>> 

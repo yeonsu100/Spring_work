@@ -25,7 +25,7 @@
 					</div>
 					<div class="panel-body">
 						<img class="img-responsive img-thumbnail" src="${pageContext.request.contextPath }/resources/images/piglet.png" alt="" />
-						<p>Price : <strong>${tmp.price }</strong></p>
+						<p>Price : $<strong>${tmp.price }</strong></p>
 						<p>Quantity : <strong>${tmp.remainCount }</strong></p>
 					</div>
 					<div class="panel-footer">
