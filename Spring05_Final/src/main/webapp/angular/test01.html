@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>webapp/angular/test01.html</title>
+<!-- angularjs 로딩하기 -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.js"></script>
+</head>
+
+<!-- body 안에서 일어나는 일은 default 컨트롤러로 처리하겠다는 의미 -->
+<body ng-app>
+<div class="container">
+	<!-- ng-xxx는 '디렉티브'라고 한다 -->
+	<h1>ng-show ng-hide directive</h1>
+	<img src="../resources/images/shocked stitch.png" ng-show="true" />		<!-- 보여줄지에 대한 여부. true면 보여준다. -->
+	<img src="../resources/images/yellow stitch.png" ng-hide="true" />		<!-- 숨길지에 대한 여부. true면 숨긴다. -->
+	<br/>
+	<label>
+		<!-- checkbox의 체크 여부를 isChecked라는 모델명으로 관리하기 -->
+		<input type="checkbox" ng-model="isChecked"/>		<!-- 보이게 할지에 대한 여부 -->
+	</label>
+	<br/>
+	<img src="../resources/images/yellow stitch.png" ng-show="isChecked"/>	<!-- isChecked는 boolean이므로 true or false의 결과를 갖는다 -->
+	<br/>
+	<!-- input 요소에 입력한 문자열을 msg라는 모델명으로 관리하기 -->
+	<input type="text" ng-model="msg" placeholder="Insert a characters..."/>
+	<!-- msg라는 모델안에 들어있는 문자열을 출력하기 -->
+	<p>{{msg}}</p>
+	<p ng-bind="msg"></p>
+	
+	<input type="text" ng-model="msg" />
+	<p>{{msg}}</p>
+	<input type="checkbox" ng-model="isChecked" />
+	<p>{{isChecked}}</p>
+	<img src="../resources/images/shocked stitch.png" ng-show="isChecked" />
+	<ul ng-init="nums=[10, 20, 30, 40, 50]">
+		<li ng-repeat="tmp in nums">{{tmp}}</li>
+	</ul>
+</div>
+
+<script>
+	/*
+	document.querySelector("input").addEventListener("input", function(){
+		var msg=document.querySelector("input").value;
+		document.querySelector("p").innerText=msg;
+	});
+	*/
+</script>
+</body>
+</html>

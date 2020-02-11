@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>webapp/angular/test04.html</title>
+<link rel="stylesheet" href="../resources/css/bootstrap.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.js"></script>
+</head>
+<body ng-app>
+	<div class="container">
+	<h3>test of angular form</h3>
+	<!-- html5 의 디폴트 validation 을 해제할 때에는 novalidate 속성을 form 에 추가한다 -->
+	<form action="signup" name="myForm" novalidate>
+		<div class="form-group has-feedback" ng-class="{'has-success':myForm.id.$valid,'has-error':myForm.id.$invalid && myForm.id.$dirty}">
+			<label for="id" class="control-label">ID</label>
+			<input ng-pattern="/^[a-z]+$/"
+				   ng-required="true" 
+				   ng-minlength="5" 
+				   ng-maxlength="10" 
+				   type="text" name="id" id="id" ng-model="id" class="form-control"/>
+			<span ng-show="myForm.id.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="myForm.id.$invalid && myForm.id.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<p ng-show="myForm.id.$error.required" class="help-block">Required</p>
+			<p ng-show="myForm.id.$error.minlength" class="help-block">Please insert more at least 5 characters</p>
+			<p ng-show="myForm.id.$error.maxlength" class="help-block">Please insert under 10 characters</p>
+			<p ng-show="myForm.id.$error.pattern" class="help-block">ONLY lowercase English can insert</p>
+		</div>
+		<button ng-disabled="myForm.$invalid" type="submit" class="btn btn-primary">Submit this form</button>
+	</form>
+	<p> myForm.id.$error = {{myForm.id.$error}}</p>
+</div>
+
+</body>
+</html>

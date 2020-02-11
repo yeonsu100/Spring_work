@@ -17,6 +17,10 @@
 	
 	<ul>
 		<li><a href="member/list.do">Show member list (Member Table)</a></li>
+		<li><a href="angular/test01.html">angularjs test - 1</a></li>
+		<li><a href="angular/test02.html">angularjs test - 2</a></li>
+		<li><a href="angular/test03.html">angularjs test - 3</a></li>
+		<li><a href="angular/test04.html">angularjs test - 4</a></li>
 	</ul>
 	
 	<h2>Notice</h2>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>webapp/angular/test03.html</title>
+<link rel="stylesheet" href="../resources/css/bootstrap.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.js"></script>
+</head>
+<body ng-app>
+<div class="container">
+	<h3>form validation</h3>
+	<form action="signup" name="myForm">
+		<div class="form-group has-feedback" 
+			ng-class="{'has-success':myForm.id.$valid,'has-error':myForm.id.$invalid && myForm.id.$dirty}">
+			<label for="id" class="control-label">ID</label>
+			<input ng-model="id" ng-required="true" type="text" class="form-control" name="id" id="id" />
+			<p class="help-block" ng-show="myForm.id.$invalid && myForm.id.$dirty">ID is required.</p>
+			<span ng-show="myForm.id.$invalid && myForm.id.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ng-show="myForm.id.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div> <br/>
+		<div class="form-group has-feedback"
+			ng-class="{'has-success':myForm.pwd.$valid,'has-error':myForm.pwd.$invalid && myForm.pwd.$dirty}">
+			<label for="pwd" class="control-label">PASSWORD</label>
+			<input ng-model="pwd" ng-required="true" type="text" class="form-control" name="pwd" id="pwd" />
+			<p class="help-block" ng-show="myForm.pwd.$invalid && myForm.pwd.$dirty">Password is required.</p>
+			<span ng-show="myForm.pwd.$invalid && myForm.pwd.$dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span ng-show="myForm.pwd.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
+		<button ng-disabled="myForm.$invalid" type="submit" class="btn btn-primary">Submit this form</button>
+	</form> <br/>
+	<p>myForm.id.$valid=<strong>{{myForm.id.$valid}}</strong></p>
+	<p>myForm.id.$invalid=<strong>{{myForm.id.$invalid}}</strong></p>
+	<p>myForm.id.$pristine=<strong>{{myForm.id.$pristine}}</strong></p>
+	<p>myForm.id.$dirty=<strong>{{myForm.id.$dirty}}</strong></p> <br/>
+	
+	<p>myForm.pwd.$valid=<strong>{{myForm.pwd.$valid}}</strong></p>
+	<p>myForm.pwd.$invalid=<strong>{{myForm.pwd.$invalid}}</strong></p> <br/>
+	
+	<p>myForm.$valid=<strong>{{myForm.$valid}}</strong></p>
+	<p>myForm.$invalid=<strong>{{myForm.$invalid}}</strong></p>
+</div>
+</body>
+</html>
