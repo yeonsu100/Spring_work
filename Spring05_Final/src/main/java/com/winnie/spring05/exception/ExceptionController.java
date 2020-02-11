@@ -27,6 +27,14 @@ public class ExceptionController {
 		return mView;
 	}
 	
+	@ExceptionHandler(NoDeliveryException.class)
+	public ModelAndView noDelivery(NoDeliveryException nde) {
+		ModelAndView mView=new ModelAndView();
+		mView.addObject("exception", nde);
+		mView.setViewName("error/data_access");
+		return mView;
+	}
+	
 /*
  * @Repository 어노테이션이 작성된 dao에서 DB 관련 Exception이 발생하면 
  * Spring 프레임워크가 DataAccessException type의 예외를 발생시킨다.

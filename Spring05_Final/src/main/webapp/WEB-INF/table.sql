@@ -40,6 +40,9 @@ CREATE TABLE board_cafe_comment2(
 
 CREATE SEQUENCE board_cafe_comment2_seq;
 
+DELETE FROM shop;
+DELETE FROM client_account;
+
 
 -- 상품 테이블
 CREATE TABLE shop(
