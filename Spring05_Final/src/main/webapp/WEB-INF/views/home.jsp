@@ -21,6 +21,7 @@
 		<li><a href="angular/test02.html">angularjs test - 2</a></li>
 		<li><a href="angular/test03.html">angularjs test - 3</a></li>
 		<li><a href="angular/test04.html">angularjs test - 4</a></li>
+		<li><p>테스트 중입니다...By 연수</p></li>
 	</ul>
 	
 	<h2>Notice</h2>
