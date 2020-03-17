@@ -64,7 +64,7 @@ CREATE TABLE client_order(
 	num NUMBER PRIMARY KEY, 					-- 주문번호
 	id VARCHAR2(30), 							-- 주문 고객의 아이디
 	code NUMBER, 								-- 주문한 상품의 번호 
-	addr VARCHAR2(50) 							-- 배송 주소
+		addr VARCHAR2(50) 							-- 배송 주소
 );
 
 -- 주문 테이블에 사용할 시퀀스 
